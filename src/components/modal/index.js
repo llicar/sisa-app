@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react'
-import { useHistory } from 'react-router-dom';
+
 
 import JovemService from '../../services/jovens'
 
@@ -165,7 +165,6 @@ const ModalForm = (
         onClose = () => { }
     }) => {
 
-    const history = useHistory();
     //Estados
     const [loading, setLoading] = useState();
     const [response, setResponse] = useState();

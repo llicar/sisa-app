@@ -100,7 +100,7 @@ const DetalheJovem = () => {
     useEffect(() => {
         async function buscarDados(){
             const reponse = await JovemService.showNotes(params.id)
-            setAnotacao(reponse.data)
+            setAnotacoes(reponse.data)
         }
 
         buscarDados();

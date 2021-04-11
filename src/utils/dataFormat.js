@@ -1,6 +1,5 @@
 import { format } from 'date-fns'
 import { isValid } from 'date-fns'
-import ptBR from 'date-fns/locale/pt-BR'
 
 class dataFormat {
 
