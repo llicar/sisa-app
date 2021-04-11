@@ -1,0 +1,195 @@
+/* Containers */
+
+.detalhesContainer{
+   
+    display: flex;
+    justify-content: space-around; 
+    margin-top: 30px;
+    width: 100%;
+    
+    
+}
+
+.infoContainer{
+    width: 45%;
+    
+   
+}
+
+.linkCalendario{
+    width:70%;
+    padding-top:5px;
+    padding-bottom:5px;
+    border-radius:7px;
+    font-family: 'Roboto', sans-serif;
+    display:flex;
+    margin-bottom:32px;
+    margin-left:auto;
+    margin-right:auto;
+    
+    background-color:#1EC3BA;
+    color:white;
+    font-size:30px;
+    text-decoration:none;
+    justify-content:center;
+
+    
+}
+.linkCalendario:hover{
+    background-color:#169E97;
+    transition:0.2s;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.formContainer {
+    width: 45%;
+    
+    float: right;
+    position: relative;
+    margin-left: 80px;
+   
+}
+
+.formCompleto{
+    width: 100%!important;
+}
+
+.cardContainer{
+    background-color: #243240;
+    border-radius: 10px;
+    padding-left: 21px;
+    padding-right: 21px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    font-family: roboto;
+}
+
+.cardContainer h1{
+    color: white;
+    font-size: 30px;
+}
+
+.card{
+    background-color: #334658;
+    border-radius: 10px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    margin-top: 30px;
+}
+
+/* fim Containers */
+
+/* Resumo */
+
+.cardResume h4 {
+    margin-top: -15px;
+    color: white;
+    font-family: roboto-Light;
+    font-size: 20px;
+}
+
+.cardResume h3{
+    color: #1EC3BA;
+    font-family: roboto-Light;
+}
+
+/* fim Resumo */
+
+/* Documentos */
+
+.cardDocs{
+    justify-content: space-between;
+    display: flex;
+}
+
+.cardDocs h3{
+    color: white;
+    font-size: 20px;
+    font-family: roboto-Light;
+}
+
+.docs{
+    width: 55%;
+}
+
+.status{
+    width: 40%;
+}
+
+.status h2{
+    color: #1ada9a;
+    font-family: roboto-regular;
+}
+
+.linkDoc,.linkCalendario{
+    float: left!important;
+    margin-bottom: 10px!important;
+
+    height: 30px!important;
+    width: 100%!important;
+    font-size: 21px!important;
+}
+
+.buttonEtapa{
+    color:white;
+    background-color: #1EC3BA;
+    border: none;
+    border-radius: 5px;
+    padding: 7px;
+    font-family: roboto;
+    width: 150px;
+    height: 35px;
+    font-size: 18px;
+
+    
+}
+.buttonEtapa:hover{
+    cursor: pointer;
+}
+
+.enviar-calendario{
+    width:100%!important;
+    height:40px!important;
+    margin-top: 25px!important;
+    justify-content:center;
+    background-color: #1EC3BA!important;
+    border: none!important;
+}
+.enviar-calendario:hover{
+    cursor: pointer;
+    border: 1px solid white;
+}
+
+/* fim Documentos */
+
+/* Anoitações */
+.cardContainer .notesTitle{
+    color: white;
+    font-size: 25px;
+    font-family: roboto-light;
+    margin-bottom: 0px;
+}
+
+.cardNotes{
+        margin-top: 10px!important;
+}
+
+.cardNotes .data_notes{
+    margin-top: -10px;
+}
+
+.cardNotes strong{
+    color:#1EC3BA;
+    font-family: roboto; 
+}
+.cardNotes .title_notes,.data_notes{
+    color: white;
+}
+
+.cardNotes .description_notes{
+    color:#C1D3E3;
+}
+
+

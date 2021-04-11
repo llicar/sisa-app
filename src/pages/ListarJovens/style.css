@@ -1,0 +1,14 @@
+.loader{
+   margin: 0 auto;
+   position: relative;
+   display: flex;
+   width: 100px;
+   margin-top: 230px;
+}
+
+.linkArrow{
+    font-size:37px;
+    color:#1EC3BA;
+    float:right;
+    position:relative;
+}

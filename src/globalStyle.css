@@ -1,0 +1,24 @@
+body{
+    background-color: #192734;
+   
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: local('Roboto'), url(assets/fonts/Roboto-Medium.ttf) format('truetype');
+}
+        
+@font-face{
+    font-family: 'Roboto-Light';
+    src: local('Roboto'), url(assets/fonts/Roboto-Light.ttf) format('truetype');
+}
+
+@font-face{
+    font-family: 'Roboto-Regular';
+    src: local('Roboto'), url(assets/fonts/Roboto-Regular.ttf) format('truetype');
+}
+
+@font-face{
+    font-family: 'Roboto-Thin';
+    src: local('Roboto'), url(assets/fonts/Roboto-Thin.ttf) format('truetype');
+}
