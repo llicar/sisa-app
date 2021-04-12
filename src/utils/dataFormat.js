@@ -1,12 +1,13 @@
-import { format } from 'date-fns'
-import { isValid } from 'date-fns'
+import { format,isValid } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR';
 
 class dataFormat {
 
     fullDateBR(props) {
 
         let date = new Date(props);
-        return date.toLocaleDateString('pt-BR',{timeZone: 'UTC'})
+        console.log(date.toLocaleDateString('pt-br',{timeZone: 'UTC'}))
+        return date.toLocaleDateString('pt-br',{timeZone: 'UTC'})
         /*
         let date = new Date(`${String(props)} 00:00:00`);
         console.log(props)
@@ -20,24 +21,25 @@ class dataFormat {
             let newDate = format(date, 'dd/MM/yyyy');
             return newDate;
         }*/
-
     };
 
     iso(props) {
-        
-        let date = new Date(String(props));
+
+        const utcStringFormated = props.replace("Z","")
+        let date = new Date(utcStringFormated);
 
         if (!isValid(date)) {
             return 0
         } else {
-            let newDate = format(date, 'yyyy-MM-dd');
+            let newDate = format(date, 'yyyy-MM-dd',{ locale: ptBR});
             return newDate;
         }
     };
 
     day(props) {
 
-        let date = new Date(props);
+        const utcStringFormated = props.replace("Z","")
+        let date = new Date(utcStringFormated);
         return date.getDate()
        
         /*
@@ -53,7 +55,8 @@ class dataFormat {
 
     month(props) {
 
-        let date = new Date(props);
+        const utcStringFormated = props.replace("Z","")
+        let date = new Date(utcStringFormated);
         return date.getMonth()
 
         /* let date = new Date(String(props));
@@ -84,7 +87,8 @@ class dataFormat {
 
     year(props) {
 
-        let date = new Date(props);
+        const utcStringFormated = props.replace("Z","")
+        let date = new Date(utcStringFormated);
         return date.getFullYear()
 
         /*
