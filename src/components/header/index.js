@@ -3,7 +3,7 @@ import {Col,Row} from 'react-bootstrap'
 
 import logo from '../../assets/images/logo_aedha.svg'
 
-import BotaoMenu from '../BotaoMenu'
+import {BotaoMenu,BotaoSair} from '../BotaoHeader'
 
 
 const Header =  () => {
@@ -13,8 +13,13 @@ const Header =  () => {
             <Col>
             <img src={logo} alt='logo aedha'/>
             </Col>
-            <Col>
-            <BotaoMenu to='/'>INICIO</BotaoMenu>
+            <Col style={{display: 'flex'}}>
+                <Col>
+                <BotaoMenu to='/Home'>INICIO</BotaoMenu>
+                </Col>
+                <Col>
+                <BotaoSair onClick={()=>{localStorage.removeItem('@sisa-app/token')}} to='/'>SAIR</BotaoSair>
+                </Col>
             </Col>
         </HeaderStyle>
           </Row>
