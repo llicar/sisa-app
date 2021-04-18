@@ -1,6 +1,9 @@
 import { Switch, Route, BrowserRouter } from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 
 import Home from './pages/home/index'
+import Login from './pages/Login'
+import autorizado from './utils/auth.js'
 
 import CadastrarEmpresa from './pages/CadastrarEmpresa/index'
 import CadastrarJovem from './pages/CadastrarJovem'
@@ -11,20 +14,39 @@ import DetalheJovem from './pages/DetalhesJovem'
 import Admissoes from './pages/Admissoes'
 import VerDadosCadastrais from './pages/VerDadosCadastrais'
 
+const RotaPrivada = ({component:Component,...rest}) =>{
+
+    const history = useHistory();
+
+    return(
+        <Route
+        {...rest}
+        render={props =>
+            autorizado()? (
+                <Component {...props}/>
+            ):(
+                history.push('/')
+            )
+        }
+        />
+    )
+}
+
 
 const Routes = () => {
     return (
         <BrowserRouter>
             <Switch>
-                <Route path="/" exact component={Home} ></Route>
-                <Route path="/CadastrarEmpresa" exact component={CadastrarEmpresa} ></Route>
-                <Route path="/CadastrarJovem" exact component={CadastrarJovem} ></Route>
-                <Route path="/CadastrarJovem_2/:id" exact component={CadastrarJovem_2} ></Route>
-                <Route path="/CadastrarJovem_3/:id" exact component={CadastrarJovem_3} ></Route>
-                <Route path="/ListarJovens" exact component={ListarJovens} ></Route>
-                <Route path="/DetalheJovem/:id" exact component={DetalheJovem} ></Route>
-                <Route path="/Admissoes" exact component={Admissoes} ></Route>
-                <Route path="/VerDadosCadastrais/:id" exact component={VerDadosCadastrais} ></Route>
+                <Route path="/" exact component={Login} ></Route>
+                <RotaPrivada path="/Home" exact component={Home} ></RotaPrivada>
+                <RotaPrivada path="/CadastrarEmpresa" exact component={CadastrarEmpresa} ></RotaPrivada>
+                <RotaPrivada path="/CadastrarJovem" exact component={CadastrarJovem} ></RotaPrivada>
+                <RotaPrivada path="/CadastrarJovem_2/:id" exact component={CadastrarJovem_2} ></RotaPrivada>
+                <RotaPrivada path="/CadastrarJovem_3/:id" exact component={CadastrarJovem_3} ></RotaPrivada>
+                <RotaPrivada path="/ListarJovens" exact component={ListarJovens} ></RotaPrivada>
+                <RotaPrivada path="/DetalheJovem/:id" exact component={DetalheJovem} ></RotaPrivada>
+                <RotaPrivada path="/Admissoes" exact component={Admissoes} ></RotaPrivada>
+                <RotaPrivada path="/VerDadosCadastrais/:id" exact component={VerDadosCadastrais} ></RotaPrivada>
             </Switch>
         </BrowserRouter>
     )
