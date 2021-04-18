@@ -48,7 +48,11 @@ export const Form = styled.form `
             font-size:26px;
 
 
-            :hover{cursor: pointer;}
+            :hover{
+                cursor: pointer;
+                background-color:#169E97;
+                border: 2px solid white;
+            }
     }
 
     span.erro{
