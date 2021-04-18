@@ -249,7 +249,7 @@ const DetalheJovem = () => {
                                 className="linkCalendario"
                                 target="_blank" 
                                 rel="noreferrer" 
-                                href={`http:////scja.s3.amazonaws.com/calendarios/${jovem.calendario}`}>
+                                href={`${process.env.REACT_APP_CALENDARIO_URL}${jovem.calendario}`}>
                                     Calendário
                                 </a>
                                 <DocButton className="linkDoc" onClick={() =>{ generateDocument(jovem, 'oficio', datasFormatadas)}}>Oficio</DocButton>
