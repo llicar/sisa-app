@@ -15,6 +15,7 @@
     "eslint-plugin-react-hooks": "^0.0.0-0cf9fc10b",
     "file-saver": "^2.0.5",
     "icons": "^1.0.0",
+    "jsonwebtoken": "^8.5.1",
     "md5": "^2.3.0",
     "pizzip": "^3.0.6",
     "react": "^17.0.1",
