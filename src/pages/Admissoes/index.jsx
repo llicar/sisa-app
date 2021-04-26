@@ -8,9 +8,11 @@ import { FaCalendarCheck } from "react-icons/fa";
 import { GoChecklist } from "react-icons/go";
 import { RiUserAddFill } from "react-icons/ri";
 import { CgArrowRightR } from 'react-icons/cg'
+import DotLoader from "react-spinners/DotLoader";
 
 import JovemService from '../../services/jovens'
 import dataFormat from '../../utils/dataFormat'
+import nada_aqui from '../../assets/images/nada_aqui.svg'
 
 
 
@@ -18,12 +20,30 @@ import dataFormat from '../../utils/dataFormat'
 const Admissoes = () => {
 
     const [jovens, setJovens] = useState([{}])
+    const [loading,setLoading] = useState(false)
+    const [total,setTotal] = useState()
 
     useEffect(() => {
 
         async function buscarDados(){
+            setLoading(true)
             const response  = await JovemService.jovensEmProcesso()
             setJovens(response.data);
+
+            /**
+             * calcula o total de jovens em processo
+             * @param {*} data 
+             */
+            function totalJovens(data){
+                let count = 0
+                data.map(f =>{
+                    count ++
+                    return count
+                })
+                setTotal(count)
+            }
+            totalJovens(response.data)
+            setLoading(false)
         }
         buscarDados()
 
@@ -38,7 +58,13 @@ const Admissoes = () => {
                     <h1>Admissões</h1>
                     <Link to='/CadastrarJovem'><RiUserAddFill size={60} color={'#fff'} /></Link>
                 </HeaderContainer>
-                <TableContainer>
+                {
+                    loading?
+                    <div style={{display: 'flex', margin: '0 auto',justifyContent: 'center',marginTop: '130px'}}>
+                        <DotLoader loading={loading} size={70} color={'#1EC3BA'} />
+                    </div>:
+                    total?
+                    <TableContainer>
                     <Headertable>
                         <Cell w={10}><h2>Admissão</h2></Cell>
                         <Cell w={30}><h2>Nome</h2></Cell>
@@ -82,10 +108,12 @@ const Admissoes = () => {
 
                         })
                     }
-
-                </TableContainer>
+                </TableContainer>:
+                <div style={{display: 'flex',justifyContent: 'center'}}>
+                    <img src={nada_aqui} alt="nada por aqui"/>
+                </div>
+                }
             </Container>
-
         </body>
     )
 }
