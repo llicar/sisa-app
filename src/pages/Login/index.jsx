@@ -1,3 +1,4 @@
+import {useState} from 'react'
 import {useForm} from 'react-hook-form'
 import {useHistory} from 'react-router-dom'
 
@@ -5,6 +6,7 @@ import {Form} from '../../components/form'
 import {InputText} from '../../components/input'
 import {InputContainer} from '../../components/inputContainer'
 import {ContainerLogin,HeaderLogin} from './style.js'
+import DotLoader from "react-spinners/DotLoader";
 
 import ServiceLogin from '../../services/login'
 
@@ -14,11 +16,13 @@ import logo from '../../assets/images/logo_aedha.svg'
 const Login = () => {
 
     const history = useHistory()
+    const [loading,setLoading] = useState(false);
 
     const {register,handleSubmit,error} = useForm({})
 
     async function submit(data){
         try{
+            setLoading(true)
             const response = await  ServiceLogin.login(data);
             localStorage.setItem('@sisa-app/token',response.data.token);
             history.push('/Home')
@@ -54,8 +58,14 @@ const Login = () => {
                 </InputText>
             </InputContainer>
 
-            <input type="submit" value="Entrar"/>
-
+            {
+                loading? 
+                <div style={{display: 'flex', margin: '0 auto',justifyContent: 'center'}}>
+                    <DotLoader loading={loading} size={40} color={'#1EC3BA'} />
+                </div>
+                
+                : <input type="submit" value="Entrar"/>
+            }
             </Form>
         </ContainerLogin>
         </body>
