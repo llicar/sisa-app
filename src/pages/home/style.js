@@ -46,14 +46,13 @@ export const LinkMenu = styled(Link)`
         font-size:30px;
         text-decoration:none;
         justify-content:center;
+        border: 2px solid rgba(0,0,0,0);
 
         :hover{
-            background-color:#169E97;
-            transition:0.2s;
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        }
-       
-
+                cursor: pointer;
+                background-color:#169E97;
+                border: 2px solid white;
+            }
 
 `
 
