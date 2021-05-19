@@ -7,7 +7,6 @@ import { useForm } from 'react-hook-form'
 
 import * as yup from 'yup';
 import generateDocument from '../../utils/docGenerator'
-import ReactCepPromise from "react-cep-promise";
 import md5 from 'md5';
 
 import Header from '../../components/header'
@@ -39,12 +38,6 @@ yup.setLocale({
 const DetalheJovem = () => {
     const params = useParams();
 
-    const [fetching, setFetching] = useState(false); // Nescessário para o funcionamento do ReactCepPromisse
-    const [cep, setCep] = useState("");// Armazena o CEP vindo da função de buscar CEP
-    const [city, setCity] = useState("")// Cidade
-    const [state, setState] = useState("");// Estado
-    const [neighborhood, setNeighborhood] = useState("");// Bairro
-    const [street, setStreet] = useState("");// Rua
     const [jovem, setJovem] = useState([{}]); // Armazena os dados do jovem
     const [anotacao, setAnotacao] = useState({});//Armazena os dados da anotação feita
     const [dirtyValues, setDirtyValues] = useState([]) // Armazena os campos alterados
@@ -54,38 +47,11 @@ const DetalheJovem = () => {
     const [datasFormatadas, setDatasFormatadas] = useState({}) // Armazena as datas formatadas
 
     const [isModalVisible, setIsModalVisible] = useState(false);// Controla a visibilidade do modal
-    const [isNoteVisible, setIsNoteVisible] = useState(false);//Controla a visibilidade formulário de anotações
+    const [isNoteVisible, setIsNoteVisible] = useState(true);//Controla a visibilidade formulário de anotações
     const [loadingCalendario,setLoadingCalendario] = useState(false); // Controla a visibilidade do loading do calendario
     const [fileName, setFileName] = useState('Clique para selecionar');//Controla o nome que aparecera no Input File
 
-    /**
-     * Preenche os estados dos campos de endereço após o componente 
-     * ReactCepPromise buscar os dados na api 
-     * @param {} result 
-     */
-    function onResultCep(result) {
-
-        const { data, error } = result;
-
-        if (data) {
-            setCep(data.cep);
-            setCity(data.city);
-            setState(data.state);
-            setNeighborhood(data.neighborhood);
-            setStreet(data.street);
-
-        }
-
-        if (error) {
-            alert(error);
-
-            setCity("");
-            setState("");
-            setNeighborhood("");
-            setStreet("");
-        }
-    }
-
+    
     //Buscando empresas na API
     useEffect(() => {
         async function buscarDados(){
@@ -253,6 +219,18 @@ const DetalheJovem = () => {
                                     Calendário
                                 </a>
                                 <DocButton className="linkDoc" onClick={() =>{ generateDocument(jovem, 'oficio', datasFormatadas)}}>Oficio</DocButton>
+                                <div className="containerContratos">
+                                    <DocButton className="linkDoc botaoContratos" onClick={() =>{ generateDocument(jovem, 'contrato-direto', datasFormatadas)}}>Contratos</DocButton>
+                                    {/*<div className="menuContratos">
+                                        <ul>
+                                            <li>Arco Ocup - 6HR</li>
+                                            <li>Arco Ocup - 4HR</li>
+                                            <li>ADM - 6HR</li>
+                                            <li>ADM - 4HR</li>
+                                        </ul>
+                                    </div>*/}
+                                </div>
+                                
                                 <form className="form-calendario"  enctype="multipart/form-data" onSubmit={handleSubmit(handleCalendario)}>
                                     <InputContainer style={{width:'100%'}}>
                                         <InputText w={70}>
@@ -649,22 +627,13 @@ const DetalheJovem = () => {
                         <InputContainer>
                             <InputText w={25}>
                                 <label>CEP</label>
-
-                                <ReactCepPromise /* componente externo para buscar de endereço pelo CEP */
-                                    id="cep"
-                                    fetching={fetching}
-                                    onChange={e => setCep(e.target.value)}
-                                    onResult={onResultCep}
-                                    setFetching={setFetching}
-                                    placeholder={jovem.cep}
-                                />
-                                <input style={{ display: "none" }} name="cep" value={cep} ref={register}></input>
+                                <input name="cep" defaultValue={jovem.cep} ref={register}></input>
                                 <span className="erro"> {errors.cep?.message} </span>
                             </InputText>
 
                             <InputText w={65}>
                                 <label>Bairro</label>
-                                <input id="neighborhood" placeholder={jovem.bairro} value={neighborhood} name='bairro' ref={register} />
+                                <input id="neighborhood" defaultValue={jovem.bairro} name='bairro' ref={register} />
                                 <span className="erro"> {errors.bairro?.message} </span>
                             </InputText>
                         </InputContainer>
@@ -672,13 +641,13 @@ const DetalheJovem = () => {
                         <InputContainer>
                             <InputText w={65}>
                                 <label>Logradouro</label>
-                                <input id="street" placeholder={jovem.rua} value={street} name='rua' ref={register} />
+                                <input id="street" defaultValue={jovem.rua} name='rua' ref={register} />
                                 <span className="erro"> {errors.rua?.message} </span>
                             </InputText>
 
                             <InputText w={25}>
                                 <label>Numero</label>
-                                <input name='numero' placeholder={jovem.numero} ref={register} />
+                                <input name='numero' defaultValue={jovem.numero} ref={register} />
                                 <span className="erro"> {errors.numero?.message} </span>
                             </InputText>
                         </InputContainer>
@@ -686,13 +655,13 @@ const DetalheJovem = () => {
                         <InputContainer>
                             <InputText w={65}>
                                 <label>Municipio</label>
-                                <input id="city" placeholder={jovem.municipio} value={city} name='municipio' ref={register} />
+                                <input id="city" defaultValue={jovem.municipio} name='municipio' ref={register} />
                                 <span className="erro"> {errors.municipio?.message} </span>
                             </InputText>
 
                             <InputText w={25}>
                                 <label>Estado</label>
-                                <input id="state" placeholder={jovem.uf} value={state} name='uf' ref={register} />
+                                <input id="state" defaultValue={jovem.uf} name='uf' ref={register} />
                                 <span className="erro"> {errors.uf?.message} </span>
                             </InputText>
                         </InputContainer>

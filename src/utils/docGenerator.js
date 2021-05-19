@@ -139,6 +139,9 @@ const generateDocument = (data,doc,datasFormatadas) => {
       rua:data.rua,
       numero:data.numero,
       bairro:data.bairro,
+      municipio:data.municipio,
+      uf:data.uf,
+      complemento:data.complemento,
       rua_emp:data.rua_emp,
       numero_emp:data.numero_emp,
       bairro_emp:data.bairro_emp,
@@ -158,6 +161,7 @@ const generateDocument = (data,doc,datasFormatadas) => {
       carga_horaria:data.carga_horaria,
       duracao_contrato: data.duracao_contrato,
       tipo_salario: data.tipo_salario,
+      tipo_salario_extenso: data.tiposalario==="vigente" ? "Salário Minimo Vigente" : "Salário Minimo Hora Vigente",
       salario:data.salario,
       oficio:data.oficio,
 
@@ -216,10 +220,35 @@ const generateDocument = (data,doc,datasFormatadas) => {
     else if(doc==='comunicado'){
       docType = 'comunicado_de_admissao';
     }
-    else if(doc=='oficio'){
+    else if(doc==='oficio'){
       docType = 'oficio';
     }
-    
+
+    else if(doc==='contrato-direto'){
+      docType = 'contrato-direto-arco-4horas';
+      /*
+      if(data.id_modalidade===1 || data.id_modalidade===2){
+        docType = 'contrato-direto-arco-6horas';
+      }
+      else if(data.id_modalidade===3){
+        docType = 'contrato-direto-arco-4horas';
+      }
+      else if(data.id_modalidade===4 || data.id_modalidade===5){
+        docType = 'contrato-direto-adm-6horas';
+      }
+      else if(data.id_modalidade===6){
+        docType = 'contrato-direto-adm-4horas';
+      }
+      else if(data.id_modalidade===7){
+        docType = 'contrato-direto-educacao-6horas';
+      }
+      else if(data.id_modalidade===8){
+        docType = 'contrato-direto-comercio-6horas';
+      }
+      else if(data.id_modalidade===9){
+        docType = 'contrato-direto-comercio-4horas';
+      }*/
+    }
     return docType;
   }
 
