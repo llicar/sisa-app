@@ -158,6 +158,7 @@ const generateDocument = (data,doc,datasFormatadas) => {
       matri_ap:data.matri_ap,
       ja:data.ja,
       tipo_contrato:data.tipo_contrato,
+      num_curso:data.num_curso,
       carga_horaria:data.carga_horaria,
       duracao_contrato: data.duracao_contrato,
       tipo_salario: data.tipo_salario,
@@ -215,7 +216,9 @@ const generateDocument = (data,doc,datasFormatadas) => {
     let docType = "";
     
     if(doc ==='carta'){
+      if(data.contrato==="indireto")
       docType = 'carta_de_encaminhamento';
+      else docType = 'carta-enc-direto'
     }
     else if(doc==='comunicado'){
       docType = 'comunicado_de_admissao';

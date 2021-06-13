@@ -124,6 +124,8 @@ const CadastrarJovem_2 = () => {
         Data.append('demissao', data.demissao)
         Data.append('inicio_emp', data.inicio_emp)
         Data.append('termino_emp', data.termino_emp)
+        Data.append('inicio_ferias', data.inicio_ferias)
+        Data.append('fim_ferias', data.fim_ferias)
         Data.append('inicial', data.inicial)
         Data.append('etapa', 2)
         Data.append('calendarName', hashCalendarName)
@@ -173,6 +175,22 @@ const CadastrarJovem_2 = () => {
                         <label>Demissão</label>
                         <input name='demissao' type="date" defaultValue={datasFormatadas.isoDemissao} ref={register} />
                         <span className="erro"> {errors.demissao?.message} </span>
+                    </InputText>
+
+                </InputContainer>
+
+                <InputContainer>
+
+                    <InputText w={45}>
+                        <label>Inicio férias</label>
+                        <input name='inicio_ferias' type="date" defaultValue={datasFormatadas.inicio_ferias} ref={register} />
+                        <span className="erro"> {errors.inicio_ferias?.message} </span>
+                    </InputText>
+
+                    <InputText w={45}>
+                        <label>Fim férias</label>
+                        <input name='fim_ferias' type="date" defaultValue={datasFormatadas.fim_ferias} ref={register} />
+                        <span className="erro"> {errors.fim_ferias?.message} </span>
                     </InputText>
 
                 </InputContainer>
