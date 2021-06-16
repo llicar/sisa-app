@@ -228,8 +228,7 @@ const generateDocument = (data,doc,datasFormatadas) => {
     }
 
     else if(doc==='contrato-direto'){
-      docType = 'contrato-direto-arco-4horas';
-      /*
+     
       if(data.id_modalidade===1 || data.id_modalidade===2){
         docType = 'contrato-direto-arco-6horas';
       }
@@ -250,7 +249,7 @@ const generateDocument = (data,doc,datasFormatadas) => {
       }
       else if(data.id_modalidade===9){
         docType = 'contrato-direto-comercio-4horas';
-      }*/
+      }
     }
     return docType;
   }
