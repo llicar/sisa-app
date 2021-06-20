@@ -18,7 +18,7 @@ label{
   
 }
 
-input,select{
+input,select,textarea{
 
     display:flex;
     width:100%;

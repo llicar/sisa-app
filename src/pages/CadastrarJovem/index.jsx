@@ -15,6 +15,7 @@ import { Title } from '../../components/title'
 import EmpresaService from '../../services/empresas'
 import JovemService from '../../services/jovens'
 import ModalForm from '../../components/modal'
+import dataFormat from '../../utils/dataFormat'
 
 
 yup.setLocale({
@@ -33,9 +34,6 @@ const validationSchema = yup.object().shape({
         .string()
         .required(),
     empresa_id: yup
-        .string()
-        .required(),
-    matri_scfv: yup
         .string()
         .required(),
     dia_ap: yup
@@ -142,8 +140,6 @@ const CadastrarJovem = () => {
                         </InputText>
                     </InputContainer>
 
-
-
                     <InputContainer>
                         <InputText w={55}>
                             <label>Dia de curso</label>
@@ -209,6 +205,14 @@ const CadastrarJovem = () => {
                         </InputText>
                     </InputContainer>
 
+                    <InputContainer>
+                        <InputText w={100}>
+                            <label>Observações</label>
+                            <textarea name='obs' ref={register({ required: true })} />
+                            <span className="erro"> {errors.obs?.message} </span>
+                        </InputText>
+                    </InputContainer>
+
                     <input type="submit" value="Enviar" />
                 </Form>
         
@@ -231,7 +235,7 @@ const CadastrarJovem = () => {
 
                                 <div className="data">
                                 <h2>{formData.nome}</h2>
-                                <h2>{formData.admissao}</h2>
+                                <h2>{dataFormat.fullDateBR(formData.admissao)}</h2>
                                 <h2>{formData.dia_ap}</h2>
                                 <h2>{formData.jornada}</h2>
                                 </div>

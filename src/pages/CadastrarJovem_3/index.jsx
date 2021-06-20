@@ -236,6 +236,14 @@ const CadastrarJovem_3 = () => {
                 <hr />
 
                 <InputContainer>
+                    <InputText w={100}>
+                        <label>Observações</label>
+                        <textarea name='obs' defaultValue={jovem.obs} ref={register} />
+                        <span className="erro"> {errors.obs?.message} </span>
+                    </InputText>
+                </InputContainer>
+                
+                <InputContainer>
                     <InputText w={45}>
                         <label>RG</label>
                         <input name='rg' ref={register} />

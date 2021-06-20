@@ -148,7 +148,6 @@ const CadastrarJovem_2 = () => {
             <Form enctype="multipart/form-data" method="post" id="form" onSubmit={handleSubmit(handleModal)}>
 
                 <InputContainer>
-
                     <InputText w={45}>
                         <label>Admissão</label>
                         <input name='admissao' type="date" defaultValue={datasFormatadas.isoAdmissao} ref={register} />
@@ -160,11 +159,9 @@ const CadastrarJovem_2 = () => {
                         <input name='inicio_emp' type="date" defaultValue={datasFormatadas.isoInicioEmp} ref={register} />
                         <span className="erro"> {errors.inicio_emp?.message} </span>
                     </InputText>
-
                 </InputContainer>
 
                 <InputContainer>
-
                     <InputText w={45}>
                         <label>Saida da empresa</label>
                         <input name='termino_emp' type="date" defaultValue={datasFormatadas.isoTerminoEmp} ref={register} />
@@ -176,11 +173,9 @@ const CadastrarJovem_2 = () => {
                         <input name='demissao' type="date" defaultValue={datasFormatadas.isoDemissao} ref={register} />
                         <span className="erro"> {errors.demissao?.message} </span>
                     </InputText>
-
                 </InputContainer>
 
                 <InputContainer>
-
                     <InputText w={45}>
                         <label>Inicio férias</label>
                         <input name='inicio_ferias' type="date" defaultValue={datasFormatadas.inicio_ferias} ref={register} />
@@ -192,17 +187,22 @@ const CadastrarJovem_2 = () => {
                         <input name='fim_ferias' type="date" defaultValue={datasFormatadas.fim_ferias} ref={register} />
                         <span className="erro"> {errors.fim_ferias?.message} </span>
                     </InputText>
-
                 </InputContainer>
 
                 <InputContainer>
-
                     <InputText w={100}>
                         <label>Formação inicial</label>
                         <input name='inicial' defaultValue={jovem.inicial} ref={register} />
                         <span className="erro"> {errors.inicial?.message} </span>
                     </InputText>
+                </InputContainer>
 
+                <InputContainer>
+                    <InputText w={100}>
+                        <label>Observações</label>
+                        <textarea name='obs' defaultValue={jovem.obs} ref={register} />
+                        <span className="erro"> {errors.obs?.message} </span>
+                    </InputText>
                 </InputContainer>
 
                 <InputContainer>
@@ -220,6 +220,7 @@ const CadastrarJovem_2 = () => {
                     </InputText> 
                 </InputContainer>
 
+               
                 <input type="submit" value="Enviar" />
 
             </Form>
