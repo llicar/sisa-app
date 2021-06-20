@@ -27,12 +27,10 @@ const Login = () => {
             localStorage.setItem('@sisa-app/token',response.data.token);
             history.push('/Home')
         }catch(err){
-            alert('Usuario ou senha incorreto')
+            alert('Usuario ou senha incorreto, tente novamente')
+            setLoading(false)
         }
-         
-
     }
-
     return (
         <body>
         <HeaderLogin>
