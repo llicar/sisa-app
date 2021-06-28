@@ -30,12 +30,17 @@ background-color:rgba(0,0,0,0.6);
     //background-color:white;
     background-color: ${props => props.status};
     width:60%;
-    height:500px;
     border-radius:10px;
+    min-height: 230px;
+    max-height: 600px;
+
     @media screen and (min-width: 0) and (max-width: 660px) {
             width:80%;
             display:block;
         }
+    padding-bottom: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
     
 }
 
@@ -45,8 +50,6 @@ background-color:rgba(0,0,0,0.6);
     font-family:Roboto-Light;
     justify-content:center;
     font-size:12px;
-    
-
 }
 
 input{
@@ -54,7 +57,6 @@ input{
     margin: 0 auto;
     display:flex;
     position:relative;
-    bottom:-90px;
     
     width:100px;
     height:30px;
@@ -169,7 +171,6 @@ const ModalForm = (
     const [loading, setLoading] = useState();
     const [response, setResponse] = useState();
     
-
     let onSubmit;
 
     if (isNote) {
@@ -195,7 +196,9 @@ const ModalForm = (
         const fOnsubmit = async (data, paramId) => {
             try{
                 await service(data,paramId).catch(err => {
+                    console.log(err)
                     throw new Error('Não foi possivel atualizar os dados')
+                    
                 })
                 setLoading(2)
                 setResponse('Inserido com suscesso!')
