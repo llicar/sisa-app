@@ -127,7 +127,8 @@ const CadastrarJovem_2 = () => {
         Data.append('inicio_ferias', data.inicio_ferias)
         Data.append('fim_ferias', data.fim_ferias)
         Data.append('inicial', data.inicial)
-        Data.append('etapa', 2)
+        Data.append('inclusao_calendario',1)
+        Data.append('obs',data.obs)
         Data.append('calendarName', hashCalendarName)
 
         setFormData(Data);

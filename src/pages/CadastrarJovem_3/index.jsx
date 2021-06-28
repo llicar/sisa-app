@@ -120,10 +120,6 @@ const validationSchema = yup.object().shape({
         .string()
         .required(),
 
-    matri_ap: yup
-        .string()
-        .required(),
-
     ja: yup
         .string()
         .required(),
@@ -131,15 +127,6 @@ const validationSchema = yup.object().shape({
     jae: yup
         .string()
         .required(),
-
-    oficio: yup
-        .string()
-        .required(),
-
-    data_oficio: yup
-        .string()
-        .required()
-
 })
 
 
@@ -580,7 +567,7 @@ const CadastrarJovem_3 = () => {
                     </InputText>    
                 </InputContainer>
                 
-                <input style={{ 'display': 'none' }} name="etapa" value={3} ref={register} />
+                <input style={{ 'display': 'none' }} name="inclusao_pessoais" value={1} ref={register} />
 
                 <input type="submit" value="Enviar" />
             </Form>

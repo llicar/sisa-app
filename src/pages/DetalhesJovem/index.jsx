@@ -220,15 +220,19 @@ const DetalheJovem = () => {
                                 </a>
                                 <DocButton className="linkDoc" onClick={() =>{ generateDocument(jovem, 'oficio', datasFormatadas)}}>Oficio</DocButton>
                                 <div className="containerContratos">
-                                    <DocButton className="linkDoc botaoContratos" onClick={() =>{ generateDocument(jovem, 'contrato-direto', datasFormatadas)}}>Contratos</DocButton>
-                                    {/*<div className="menuContratos">
-                                        <ul>
-                                            <li>Arco Ocup - 6HR</li>
-                                            <li>Arco Ocup - 4HR</li>
-                                            <li>ADM - 6HR</li>
-                                            <li>ADM - 4HR</li>
-                                        </ul>
-                                    </div>*/}
+                                    {
+                                        jovem.contrato === 'direto' ?
+                                        <DocButton className="linkDoc" onClick={() =>{ generateDocument(jovem, 'contrato-direto', datasFormatadas)}}>Contrato</DocButton>
+                                        :
+                                        <DocButton 
+                                            className="linkDoc" 
+                                            onClick={event=>event.preventDefault() } 
+                                            style={{ pointerEvents: 'none', backgroundColor: '#465f77'}}
+                                            >
+                                            Contrato
+                                        </DocButton>
+                                    }
+                                    
                                 </div>
                                 
                                 <form className="form-calendario"  enctype="multipart/form-data" onSubmit={handleSubmit(handleCalendario)}>

@@ -8,7 +8,9 @@ import { FaCalendarCheck } from "react-icons/fa";
 import { GoChecklist } from "react-icons/go";
 import { RiUserAddFill } from "react-icons/ri";
 import { CgArrowRightR } from 'react-icons/cg'
+import { TiUserDelete } from 'react-icons/ti'
 import DotLoader from "react-spinners/DotLoader";
+import ModalForm from '../../components/modal';
 
 import JovemService from '../../services/jovens'
 import dataFormat from '../../utils/dataFormat'
@@ -22,6 +24,8 @@ const Admissoes = () => {
     const [jovens, setJovens] = useState([{}])
     const [loading,setLoading] = useState(false)
     const [total,setTotal] = useState()
+    const [isModalVisible, setIsModalVisible] = useState(false);// Controla a visibilidade do modal
+    const [idDeleteJovem, setIdDeleteJovem] = useState();
 
     useEffect(() => {
 
@@ -49,6 +53,10 @@ const Admissoes = () => {
 
     }, [])
 
+    async function deletarAdmissao(id){
+        await JovemService.deletarAdmissao(id)
+    }
+
     return (
         <body>
 
@@ -66,7 +74,8 @@ const Admissoes = () => {
                     total?
                     <TableContainer>
                     <Headertable>
-                        <Cell w={10}><h2>Admissão</h2></Cell>
+                        <Cell w={2}></Cell>
+                        <Cell w={7}><h2>Admissão</h2></Cell>
                         <Cell w={30}><h2>Nome</h2></Cell>
                         <Cell w={25}><h2>Empresa</h2></Cell>
                         <Cell w={28}><h2>Etapa</h2></Cell>
@@ -75,7 +84,19 @@ const Admissoes = () => {
                         jovens.map(jovem => {
                             return (
                                 <Row>
-                                    <Cell w={10}> <p>{dataFormat.fullDateBR(jovem.admissao)}</p></Cell>
+                                    <Cell w={2} style={{marginLeft:'10px'}}> 
+                                        <TiUserDelete 
+                                            size={30} 
+                                            color={'#ee5d5d'}
+                                            onClick={() =>{
+                                                setIsModalVisible(true)
+                                                setIdDeleteJovem(jovem.id_jovem);
+                                            }}
+                                            style={{cursor:'pointer'}}
+                                            >
+                                        </TiUserDelete>
+                                    </Cell>
+                                    <Cell w={7}> <p>{dataFormat.fullDateBR(jovem.admissao)}</p></Cell>
                                     <Cell w={30}> <p>{jovem.nome}</p></Cell>
                                     <Cell w={25}> <p>{  jovem.nome_fantasia  }</p></Cell>
                                     <CellEtapa w={28}>
@@ -83,13 +104,24 @@ const Admissoes = () => {
                                             <RiUserAddFill size={38} color={'#36C097'} />
                                         </Link>
                                         <Link to={`/CadastrarJovem_2/${jovem.id_jovem}`}>
-                                            <FaCalendarCheck size={28} color={jovem.etapa <2?'#fff':'#36C097'} />
-                                        </Link>                      
-                                        <Link to={`/CadastrarJovem_3/${jovem.id_jovem}`}>
-                                            <GoChecklist size={38} color={jovem.etapa < 3?'#fff':'#36C097'} />
-                                        </Link>     
+                                            <FaCalendarCheck size={28} color={jovem.inclusao_calendario?'#36C097':'#fff'} />
+                                        </Link>   
+
                                         {
-                                            jovem.etapa >= 3 ?
+                                            jovem.inclusao_pessoais?
+                                            <Link
+                                                to={'#'}
+                                                onClick={event => event.preventDefault()}
+                                                style={{ pointerEvents: 'none' }}>
+                                                <GoChecklist size={38} color={'#278d6e'} />
+                                            </Link> :
+                                            <Link to={`/CadastrarJovem_3/${jovem.id_jovem}`}>
+                                                 <GoChecklist size={38} color={'#fff'} />
+                                            </Link>  
+                                        }   
+                                          
+                                        {
+                                            jovem.inclusao && jovem.inclusao_calendario && jovem.inclusao_pessoais?
                                                 <Link
                                                     to={`/DetalheJovem/${jovem.id_jovem}`}>
                                                     <CgArrowRightR size={38} color={'#fff'} />
@@ -98,7 +130,7 @@ const Admissoes = () => {
                                                     to={'#'}
                                                     onClick={event => event.preventDefault()}
                                                     style={{ pointerEvents: 'none' }}>
-                                                    < CgArrowRightR size={38} color={jovem.etapa >= 3 ? '#fff' : '#496B8B'} />
+                                                    <CgArrowRightR size={38} color={'#496B8B'} />
                                                 </Link>
                                         }
 
@@ -114,6 +146,22 @@ const Admissoes = () => {
                 </div>
                 }
             </Container>
+            {
+                isModalVisible?
+                <ModalForm  
+                    onClose={() => {
+                        setIsModalVisible(false)
+                        setIdDeleteJovem('');
+                    }}
+                    title={'Confirmar'}
+                    service={JovemService.deletarAdmissao}
+                    data={idDeleteJovem}
+                    >
+                    <h2>Tem certeza que deseja exluir a admissão?</h2>
+                </ModalForm> :
+                false
+            }
+            
         </body>
     )
 }
