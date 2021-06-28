@@ -36,6 +36,10 @@ class JovemService {
     async jovensEmProcesso() {
         return await api.get('/jovensEmProcesso');
     }
+
+    async deletarAdmissao(id) {
+        return await api.post('/deletarAdmissao',id);
+    }
 }
 
 export default new JovemService();
