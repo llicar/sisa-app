@@ -60,8 +60,7 @@ label.file{
     align-items:center;
     text-indent:10px;
     
-    background-color:#597B9C;
-    border:1px solid #fff;
+    background-color:#465f77;
     border-radius:5px;
     color:white;
     font-size:18px;
@@ -69,7 +68,7 @@ label.file{
     margin-top:5px;
     :hover{
         cursor:pointer;
-        background-color:#415A72;
+        background-color:#2F4153;
     }
 }
 
