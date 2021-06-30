@@ -48,7 +48,8 @@ const DetalheJovem = () => {
 
     const [isModalVisible, setIsModalVisible] = useState(false);// Controla a visibilidade do modal
     const [isNoteVisible, setIsNoteVisible] = useState(true);//Controla a visibilidade formulário de anotações
-    const [loadingCalendario,setLoadingCalendario] = useState(false); // Controla a visibilidade do loading do calendario
+    const [loadingCalendario,setLoadingCalendario] = useState(0); // Controla a visibilidade do loading do calendario
+    const [loadingFinalizar,setLoadingFinalizar] = useState(0); // Controla a visibilidade do loading do finalizar
     const [fileName, setFileName] = useState('Clique para selecionar');//Controla o nome que aparecera no Input File
 
     
@@ -267,18 +268,24 @@ const DetalheJovem = () => {
                             <div className="status">
                                 <h3>Impressão</h3>
                                 {
-                                    jovem.etapa == 4 ?
+                                    jovem.finalizado?
                                         <h2>Finalizado</h2>
                                         : <div>
                                             <h2 style={{ color: '#FA5757' }}>Pendente</h2>
-                                            <button className="buttonEtapa" onClick={async () => { 
-                                                await JovemService.updateEtapa(params.id) 
+                                            {
+                                        loadingFinalizar?
+                                            <BeatLoader  loading={loadingFinalizar} color={'#1EC3BA'}/> 
+                                            : <button className="buttonEtapa" onClick={async () => { 
+                                                setLoadingFinalizar(true)
+                                                await JovemService.finalizarAdmissao(params.id)
                                                 setEtapaJovem(!etapaJovem)
-                                                }}>Finalizar</button>
+                                                setLoadingFinalizar(false)
+                                                }}>Finalizar</button> 
+                                            }
                                         </div>
                                 }
-                               
                             </div>
+
                         </div>
 
                         <h3 className="notesTitle">Anotações</h3>
