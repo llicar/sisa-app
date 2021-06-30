@@ -43,6 +43,7 @@ export const Headertable = styled.div`
     h2{
         color:#1EC3BA;
         font-family:roboto-regular;
+        font-size: 20px;
     }
 
 

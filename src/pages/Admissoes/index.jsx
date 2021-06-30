@@ -9,6 +9,8 @@ import { GoChecklist } from "react-icons/go";
 import { RiUserAddFill } from "react-icons/ri";
 import { CgArrowRightR } from 'react-icons/cg'
 import { TiUserDelete } from 'react-icons/ti'
+import { RiUserUnfollowFill } from 'react-icons/ri'
+
 import DotLoader from "react-spinners/DotLoader";
 import ModalForm from '../../components/modal';
 
@@ -53,10 +55,6 @@ const Admissoes = () => {
 
     }, [])
 
-    async function deletarAdmissao(id){
-        await JovemService.deletarAdmissao(id)
-    }
-
     return (
         <body>
 
@@ -75,7 +73,7 @@ const Admissoes = () => {
                     <TableContainer>
                     <Headertable>
                         <Cell w={2}></Cell>
-                        <Cell w={7}><h2>Admissão</h2></Cell>
+                        <Cell w={10}><h2>Admissão</h2></Cell>
                         <Cell w={30}><h2>Nome</h2></Cell>
                         <Cell w={25}><h2>Empresa</h2></Cell>
                         <Cell w={28}><h2>Etapa</h2></Cell>
@@ -85,8 +83,8 @@ const Admissoes = () => {
                             return (
                                 <Row>
                                     <Cell w={2} style={{marginLeft:'10px'}}> 
-                                        <TiUserDelete 
-                                            size={30} 
+                                        <RiUserUnfollowFill
+                                            size={26} 
                                             color={'#ee5d5d'}
                                             onClick={() =>{
                                                 setIsModalVisible(true)
@@ -94,9 +92,9 @@ const Admissoes = () => {
                                             }}
                                             style={{cursor:'pointer'}}
                                             >
-                                        </TiUserDelete>
+                                        </RiUserUnfollowFill>
                                     </Cell>
-                                    <Cell w={7}> <p>{dataFormat.fullDateBR(jovem.admissao)}</p></Cell>
+                                    <Cell w={10}> <p>{dataFormat.fullDateBR(jovem.admissao)}</p></Cell>
                                     <Cell w={30}> <p>{jovem.nome}</p></Cell>
                                     <Cell w={25}> <p>{  jovem.nome_fantasia  }</p></Cell>
                                     <CellEtapa w={28}>
@@ -146,7 +144,7 @@ const Admissoes = () => {
                 </div>
                 }
             </Container>
-            {
+            { 
                 isModalVisible?
                 <ModalForm  
                     onClose={() => {

@@ -25,8 +25,8 @@ class JovemService {
         return await api.get(`/anotacoes/${id}`)
     }
 
-    async updateEtapa(id) {
-        return await api.post(`/updateEtapa/${id}`)
+    async finalizarAdmissao(id) {
+        return await api.post(`/finalizarAdmissao/${id}`)
     }
 
     async createNote(data, id) {
@@ -38,7 +38,7 @@ class JovemService {
     }
 
     async deletarAdmissao(id) {
-        return await api.post('/deletarAdmissao',id);
+        return await api.post(`/deletarAdmissao/${id}`);
     }
 }
 
