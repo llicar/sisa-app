@@ -155,6 +155,11 @@ const generateDocument = (data,doc,datasFormatadas) => {
       fone1:data.fone1,
       fone2:data.fone2,
 
+      texto_escolaridade: 
+        data.escolaridade==="MEDIO COMPLETO"? 
+        "que concluiu o ENSINO MÉDIO." : 
+        `estar devidamente matriculado no ${data.escolaridade} do ensino médio`,
+
       matri_ap:data.matri_ap,
       ja:data.ja,
       tipo_contrato:data.tipo_contrato,
