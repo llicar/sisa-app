@@ -52,10 +52,6 @@ const validationSchema = yup.object().shape({
         .string()
         .required(),
 
-    bilhete_unico: yup
-        .string()
-        .required(),
-
     cidade_nascimento: yup
         .string()
         .required(),
@@ -97,14 +93,6 @@ const validationSchema = yup.object().shape({
         .required(),
 
     uf: yup
-        .string()
-        .required(),
-
-    tempo_moradia: yup
-        .string()
-        .required(),
-
-    sit_imovel: yup
         .string()
         .required(),
 

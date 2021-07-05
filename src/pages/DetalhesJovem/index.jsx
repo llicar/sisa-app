@@ -165,8 +165,7 @@ const DetalheJovem = () => {
     async function handleCalendario(data) {
         
         setLoadingCalendario(true)
-        console.log('a')
-
+        
         //Tratando nome do calendario
         const md5Calendar = md5(data.calendario[0].name); //criando hash md5 com o nome do arquivo
         const typeFile = data.calendario[0].name.split(".");//capturando o tipo do arquivo
