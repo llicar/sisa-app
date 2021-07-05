@@ -148,6 +148,10 @@ const CadastrarJovem_2 = () => {
 
             <Form enctype="multipart/form-data" method="post" id="form" onSubmit={handleSubmit(handleModal)}>
 
+                <h2>
+                    {jovem.tipo_contrato} - {jovem.carga_horaria}
+                </h2>
+                    <hr />
                 <InputContainer>
                     <InputText w={45}>
                         <label>Admissão</label>
