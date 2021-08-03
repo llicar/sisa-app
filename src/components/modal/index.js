@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState } from 'react'
 
-
 import JovemService from '../../services/jovens'
 
 import styled from 'styled-components';
@@ -168,6 +167,8 @@ const ModalForm = (
     }) => {
 
     //Estados
+    //const {isNoteVisible,setIsNoteVisible} = useModal();
+    //const {isModalVisible,setIsModalVisible} = useModal();
     const [loading, setLoading] = useState();
     const [response, setResponse] = useState();
     

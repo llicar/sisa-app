@@ -74,8 +74,8 @@
     border-radius: 10px;
     padding-left: 16px;
     padding-right: 16px;
-    padding-top: 1px;
-    padding-bottom: 1px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     margin-top: 30px;
 }
 
@@ -93,6 +93,26 @@
 .cardResume h3{
     color: #1EC3BA;
     font-family: roboto-Light;
+}
+
+.btnDesligar{
+    color:#EB5757;
+    border: 1px solid #EB5757;
+    border-radius:5px;
+    background: none;
+
+    font-family: roboto;
+    font-size:16px;
+
+    width: 150px;
+    height:30px;
+}
+
+.btnDesligar:hover{
+    background-color: #EB5757;
+    color: white;
+    border: none;
+    cursor: pointer;
 }
 
 /* fim Resumo */

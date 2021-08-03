@@ -17,6 +17,8 @@ import { InputContainer } from '../../components/inputContainer'
 import { LinkMenu as DocButton } from "../home/style";
 import { InputText } from "../../components/input";
 import FormNote from '../../components/formNote'
+import FormDesligamento from '../../components/FormDesligamento'
+
 
 import EmpresaService from '../../services/empresas'
 import JovemService from '../../services/jovens'
@@ -40,14 +42,18 @@ const DetalheJovem = () => {
 
     const [jovem, setJovem] = useState([{}]); // Armazena os dados do jovem
     const [anotacao, setAnotacao] = useState({});//Armazena os dados da anotação feita
+    const [desligamento, setDesligamento] = useState({});//Armazena os dados da anotação feita
     const [dirtyValues, setDirtyValues] = useState([]) // Armazena os campos alterados
     const [anotacoes, setAnotacoes] = useState([{}]); // Armazena as anotações do jovem
     const [etapaJovem,setEtapaJovem] = useState(true); // Armazena a etapa jovem
     const [empresas, setEmpresas] = useState([{}]) // Armazena as empresas
     const [datasFormatadas, setDatasFormatadas] = useState({}) // Armazena as datas formatadas
 
-    const [isModalVisible, setIsModalVisible] = useState(false);// Controla a visibilidade do modal
-    const [isNoteVisible, setIsNoteVisible] = useState(true);//Controla a visibilidade formulário de anotações
+    
+    const [isModalDeslVisible, setModalDeslVisible] = useState(false);// Controla a visibilidade do modal
+    const [isFormDeslVisible, setIsFormDeslVisible] = useState(true);//Controla a visibilidade formulário de anotações
+    const [isModalVisible, setIsModalVisible] = useState();// Controla a visibilidade do modal
+    const [isNoteVisible, setIsNoteVisible] = useState();//Controla a visibilidade formulário de anotações
     const [loadingCalendario,setLoadingCalendario] = useState(0); // Controla a visibilidade do loading do calendario
     const [loadingFinalizar,setLoadingFinalizar] = useState(0); // Controla a visibilidade do loading do finalizar
     const [fileName, setFileName] = useState('Clique para selecionar');//Controla o nome que aparecera no Input File
@@ -158,7 +164,20 @@ const DetalheJovem = () => {
         setAnotacao(data)
     }
 
-    /**
+    function handleModalDesligamento(data) {
+        setModalDeslVisible(true)
+
+    }
+      /**
+     * Captura dos dados do formulario de desligamento e insere no estado {Anotacoes}
+     * @param {*} data dados do formulário de desligamento
+     */
+       function handleDesligamento(data) {
+        setIsNoteVisible(false)
+        setDesligamento(data)
+    }
+
+    /** 
      * Faz upload do calendário para alteração
      * @param {*} data 
      */
@@ -204,6 +223,7 @@ const DetalheJovem = () => {
                                 <h3>Admissão</h3>
                                 <h4>{datasFormatadas.admissao}</h4>
                             </div>
+                            <button className="btnDesligar" disable value="disable"  onClick={() => {}/*handleModalDesligamento*/}>Desligar Jovem</button>
                         </div>
 
                         <div className="cardDocs card">
@@ -792,6 +812,35 @@ const DetalheJovem = () => {
                     </Form> 
                 </div>
             </div>
+
+            { isModalDeslVisible ?
+                <ModalForm
+                    title={'Desligar Jovem'}
+                    paramId={params.id}
+                    data={dirtyValues}
+                    onClose={() => {
+                        setIsModalVisible(false)
+                        setIsNoteVisible(true)
+                    }}
+                    service={JovemService.update2}
+                    serviceNote={JovemService.createNote}
+                    dataNote={anotacao}
+                    isNoteVisible={isNoteVisible}
+                    isNote={true}
+                    rFail="Ops, algo deu errado :("
+                    rSuccess="Desligamento realizado!"
+                >
+
+                    {
+                        isFormDeslVisible ?
+
+                            <FormDesligamento handleDesligamento={handleDesligamento} />
+
+                            :false
+                    }
+                </ModalForm> :
+                false
+            }
 
             { isModalVisible ?
                 <ModalForm

@@ -3,7 +3,7 @@ import { InputText } from '../input'
 import styled from 'styled-components'
 import { useForm } from 'react-hook-form'
 
-const FormNoteStyle = styled.form`
+const FormStyle = styled.form`
     select{
         background-color:white;
         border-color:#1EC3BA;
@@ -29,34 +29,33 @@ const NoteContainer = styled.div`
     justify-content:center;
 `
 
-const FormNote = ({ handleAnotacao = () => { } }) => {
+const FormDesligamento = ({ handleDesligamento = () => { } }) => {
     const { register, handleSubmit } = useForm({});
 
     return (
         <NoteContainer>
-            <FormNoteStyle onSubmit={handleSubmit(handleAnotacao)}>
+            <FormStyle onSubmit={handleSubmit(handleDesligamento)}>
                 <InputContainer>
                     <InputText w={100}>
                         <label>Motivo</label>
-                        <select name="titulo" ref={register} required>
-                            <option>Correção de dados</option>
-                            <option>Alteração nas datas</option>
-                            <option>Desligamento</option>
+                        <select name="motivo_desligamento" ref={register} required>
+                            <option>Término de contrato</option>
+                            <option>Solitação do aprendiz</option>
+                            <option>Inadaptação</option>
                         </select>
                     </InputText>
                 </InputContainer>
                 <InputContainer>
                     <InputText>
-                        <label>Descrição</label>
-                        <textarea name="descricao" type="textfield" ref={register} required />
+                        <label>Detalhes</label>
+                        <textarea name="descricao_desligamento" type="textfield" ref={register} required />
                     </InputText>
                 </InputContainer>
-                <input type='submit' value="Anotar!" />
-            </FormNoteStyle>
+                <input type='submit' value="Seguinte" />
+            </FormStyle>
         </NoteContainer>
     )
 }
 
-export default FormNote
-
+export default FormDesligamento
 

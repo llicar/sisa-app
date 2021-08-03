@@ -7,8 +7,7 @@ import { HeaderContainer, Container, TableContainer, Headertable, Row, Cell, Cel
 import { FaCalendarCheck } from "react-icons/fa";
 import { GoChecklist } from "react-icons/go";
 import { RiUserAddFill } from "react-icons/ri";
-import { CgArrowRightR } from 'react-icons/cg'
-import { TiUserDelete } from 'react-icons/ti'
+import{ FaArrowCircleRight } from 'react-icons/fa'
 import { RiUserUnfollowFill } from 'react-icons/ri'
 
 import DotLoader from "react-spinners/DotLoader";
@@ -23,11 +22,11 @@ import nada_aqui from '../../assets/images/nada_aqui.svg'
 
 const Admissoes = () => {
 
-    const [jovens, setJovens] = useState([{}])
-    const [loading,setLoading] = useState(false)
-    const [total,setTotal] = useState()
-    const [isModalVisible, setIsModalVisible] = useState(false);// Controla a visibilidade do modal
+    const [jovens, setJovens] = useState([{}]);
+    const [loading,setLoading] = useState(false);
+    const [total,setTotal] = useState();
     const [idDeleteJovem, setIdDeleteJovem] = useState();
+    const [isModalVisible, setIsModalVisible] = useState();
 
     useEffect(() => {
 
@@ -117,21 +116,11 @@ const Admissoes = () => {
                                                  <GoChecklist size={38} color={'#fff'} />
                                             </Link>  
                                         }   
-                                          
-                                        {
-                                            jovem.inclusao && jovem.inclusao_calendario && jovem.inclusao_pessoais?
-                                                <Link
-                                                    to={`/DetalheJovem/${jovem.id_jovem}`}>
-                                                    <CgArrowRightR size={38} color={'#fff'} />
-                                                </Link> :
-                                                <Link
-                                                    to={'#'}
-                                                    onClick={event => event.preventDefault()}
-                                                    style={{ pointerEvents: 'none' }}>
-                                                    <CgArrowRightR size={38} color={'#496B8B'} />
-                                                </Link>
-                                        }
-
+                                        <Link
+                                            to={`/DetalheJovem/${jovem.id_jovem}`}>
+                                            <FaArrowCircleRight size={36} color={'#fff'} />
+                                        </Link> 
+                                        
                                     </CellEtapa>
                                 </Row>
                             )
