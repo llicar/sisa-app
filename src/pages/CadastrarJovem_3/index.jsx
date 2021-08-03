@@ -63,15 +63,7 @@ const validationSchema = yup.object().shape({
     fone1: yup
         .string()
         .required(),
-
-    opc_responsavel: yup
-        .string()
-        .required(),
-
-    mae: yup
-        .string()
-        .required(),
-
+    
     cep: yup
         .string()
         .required(),
@@ -97,10 +89,6 @@ const validationSchema = yup.object().shape({
         .required(),
 
     escola: yup
-        .string()
-        .required(),
-
-    escolaridade: yup
         .string()
         .required(),
 
