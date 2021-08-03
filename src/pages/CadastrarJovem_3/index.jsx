@@ -95,11 +95,7 @@ const validationSchema = yup.object().shape({
     periodo: yup
         .string()
         .required(),
-
-    ja: yup
-        .string()
-        .required(),
-
+    
     jae: yup
         .string()
         .required(),
