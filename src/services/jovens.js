@@ -40,6 +40,9 @@ class JovemService {
     async deletarAdmissao(id) {
         return await api.post(`/deletarAdmissao/${id}`);
     }
+    async desligarJovem(data,id) {
+        return await api.post(`/desligarJovem/${id}`,data);
+    }
 }
 
 export default new JovemService();
