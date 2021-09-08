@@ -62,7 +62,7 @@ export const Form = styled.form `
     }
 
     p.info{
-        color:#B2B8BF;
+        color:#43CD6A;
         font-family:roboto-light;
         font-size:16px;
         margin-left:10px;
