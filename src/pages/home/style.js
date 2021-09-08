@@ -2,56 +2,53 @@ import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 
 export const Menu = styled.div`
-    
-    border-radius:10px;
-    width:660px;
-    height:380px;
+
+    width:100%;
+    height:70vh;
     display:flex;
-    margin: 0 auto;
-    margin-top:150px;
     justify-content:center;
     align-items:center;
+    margin-top:8vh;
+    border-top: 2px solid #fff;
+    border-bottom: 2px solid #fff;
 
-    background-color:#243240;
-
-    
     ul{
         width:100%;
         list-style:none;
-        margin-left:-30px;
-        margin-top:30px;
+    }
 
-       
+    li{
+        justify-content:center;
+        display:flex;
     }
     @media screen and (min-width: 0) and (max-width: 660px) {
         width:100%;
     }
 
+
 `
 
 export const LinkMenu = styled(Link)`
 
-        width:70%;
-        padding-top:5px;
-        padding-bottom:5px;
+        width:30vw;
+        height: 9vh;
+        padding: 5px 10px 5px 10px;
         border-radius:7px;
         font-family: 'Roboto', sans-serif;
         display:flex;
-        margin-bottom:32px;
-        margin-left:auto;
-        margin-right:auto;
-        
+        margin-bottom:25px;
+        align-items:center;
         background-color:#1EC3BA;
         color:white;
-        font-size:30px;
+        font-size:30pt;
         text-decoration:none;
-        justify-content:center;
+        justify-content:space-between;
         border: 2px solid rgba(0,0,0,0);
 
         :hover{
                 cursor: pointer;
                 background-color:#169E97;
-                border: 2px solid white;
+                box-shadow: -40px 0px 0px rgba(255, 255, 255, 0.9);
             }
 
 `
