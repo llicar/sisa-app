@@ -12,7 +12,6 @@ import ServiceLogin from '../../services/login'
 
 import logo from '../../assets/images/logo_aedha.svg'
 
-
 const Login = () => {
 
     const history = useHistory()
