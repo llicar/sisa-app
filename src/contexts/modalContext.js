@@ -10,7 +10,7 @@ export default function ModalProvider({children}) {
     
     const [anotacao,setAnotacao] = useState({});
     const [dataDesligamento,setDataDesligamento] = useState({});
-    const [disableButton,setDisableButton] = useState(true);
+    const [disableButton,setDisableButton] = useState(false);
    
 
     return(

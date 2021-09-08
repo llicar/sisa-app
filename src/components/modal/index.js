@@ -38,7 +38,7 @@ const ModalForm = (
     const {anotacao} = useModal();
     const {setIsModalVisible,setIsModalDeslVisible} = useModal();// Controla a visibilidade do modal
     const {isNoteVisible, setIsNoteVisible} = useModal();//Controla a visibilidade formulário de anotações
-    const {disableButton,setDisableButton} = useModal();
+    const {setDisableButton} = useModal();
     
     const modalType = {
         
@@ -161,7 +161,6 @@ const ModalForm = (
                                         modalType[type](data, paramId)
                                     }}
                                     value="Enviar"
-                                    disabled={disableButton}
                                 />
                         }
                     </div>

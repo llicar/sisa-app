@@ -9,8 +9,7 @@ export const Menu = styled.div`
     justify-content:center;
     align-items:center;
     margin-top:8vh;
-    border-top: 2px solid #fff;
-    border-bottom: 2px solid #fff;
+    background-color:#142331;
 
     ul{
         width:100%;
