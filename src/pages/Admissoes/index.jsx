@@ -16,6 +16,7 @@ import ModalForm from '../../components/modal';
 import JovemService from '../../services/jovens'
 import dataFormat from '../../utils/dataFormat'
 import nada_aqui from '../../assets/images/nada_aqui.svg'
+import { useModal } from '../../contexts/modalContext';
 
 
 
@@ -26,7 +27,7 @@ const Admissoes = () => {
     const [loading,setLoading] = useState(false);
     const [total,setTotal] = useState();
     const [idDeleteJovem, setIdDeleteJovem] = useState();
-    const [isModalVisible, setIsModalVisible] = useState();
+    const {isModalVisible, setIsModalVisible} = useModal();
 
     useEffect(() => {
 
@@ -136,13 +137,10 @@ const Admissoes = () => {
             { 
                 isModalVisible?
                 <ModalForm  
-                    onClose={() => {
-                        setIsModalVisible(false)
-                        setIdDeleteJovem('');
-                    }}
                     title={'Confirmar'}
                     service={JovemService.deletarAdmissao}
                     data={idDeleteJovem}
+                    type={'default'}
                     >
                     <h2>Tem certeza que deseja exluir a admissão?</h2>
                 </ModalForm> :

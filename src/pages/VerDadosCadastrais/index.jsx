@@ -13,11 +13,13 @@ import { InputContainer } from '../../components/inputContainer'
 import { Title } from '../../components/title'
 import FormNote from '../../components/formNote'
 import ModalForm from '../../components/modal'
+import { useModal } from '../../contexts/modalContext';
 
 import EmpresaService from '../../services/empresas'
 import JovemService from '../../services/jovens'
 import dataFormat from "../../utils/dataFormat"
 import getDirtyValues from '../../utils/getDirtyValues'
+
 
 
 yup.setLocale({
@@ -67,10 +69,9 @@ const DadosCadastrais = () => {
     const [jovem, setJovem] = useState([]);// Armazena os jovens
     const [datasFormatadas, setDatasFormatadas] = useState({}) //Armazena as datas formatadas
     const [dirtyValues, setDirtyValues] = useState([])// Armazena os valores alterados no formulario
-    const [anotacao, setAnotacao] = useState([{}])// Armazena as anotacoes
 
-    const [isModalVisible, setIsModalVisible] = useState(false); // Controla a visibilidade do modal
-    const [isNoteVisible, setIsNoteVisible] = useState(true);//Controla a visibilidade formulário de anotações
+    const {isModalVisible, setIsModalVisible} = useModal(); // Controla a visibilidade do modal
+    const {isNoteVisible, setIsNoteVisible} = useModal();//Controla a visibilidade formulário de anotações
   
     const { 
         register, 
@@ -122,17 +123,10 @@ const DadosCadastrais = () => {
     */
      function handleModal(data) {
         setDirtyValues(getDirtyValues(dirtyFields, data))
+        setIsNoteVisible(true)
         setIsModalVisible(true)
     }
 
-    /**
-     * Captura dos dados do formulario de anotações e insere no estado {Anotacoes}
-     * @param {*} data dados do formulário de anotações
-     */
-    function handleAnotacao(data) {
-        setIsNoteVisible(false)
-        setAnotacao(data)
-    }
 
     return (
 
@@ -270,17 +264,12 @@ const DadosCadastrais = () => {
                         title={'Tudo Certo?'}
                         service={JovemService.update2}
                         data={dirtyValues}
-                        dataNote={anotacao}
                         paramId={params.id}
-                        isNote={true}
-                        isNoteVisible={isNoteVisible}
-                        onClose={() => {
-                            setIsModalVisible(false)
-                        }}
+                        type={'note'}
                     >
                         {
                             isNoteVisible ? // verifica se o formulário de anotações é pra estar visivel
-                                <FormNote handleAnotacao={handleAnotacao} />
+                                <FormNote/>
                                 :
                                 <div className="resumoContainer">
                                     <div className="tag">
