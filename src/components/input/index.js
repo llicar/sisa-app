@@ -86,3 +86,23 @@ input[type=file] {
 
 `
 
+export const Submit = styled.input`
+
+    display:flex;
+    align-content:center;
+    justify-content:center;
+    align-items:center;
+
+    background-color:#1EC3BA;
+    color:white;
+    font-family:Roboto;
+    border:none;
+
+    :hover{
+        cursor: pointer;
+        background-color:#169E97;
+        border: 2px solid white;
+    }
+
+`
+
