@@ -2,10 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Routes from './routes.js';
 import reportWebVitals from './reportWebVitals';
+import ModalProvider from "./contexts/modalContext"
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <Routes />
+    <ModalProvider>
+      <Routes />
+    </ModalProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
