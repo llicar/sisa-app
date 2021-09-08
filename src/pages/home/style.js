@@ -25,13 +25,22 @@ export const Menu = styled.div`
         width:100%;
     }
 
+    .btn-menu{
+        :hover{
+                cursor: pointer;
+                background-color:#169E97;
+                box-shadow: -40px 0px 0px rgba(255, 255, 255, 0.9);
+            }
+
+        width:30vw !important;
+        height: 9vh !important;
+    }
+
 
 `
 
 export const LinkMenu = styled(Link)`
 
-        width:30vw;
-        height: 9vh;
         padding: 5px 10px 5px 10px;
         border-radius:7px;
         font-family: 'Roboto', sans-serif;
@@ -45,11 +54,11 @@ export const LinkMenu = styled(Link)`
         justify-content:space-between;
         border: 2px solid rgba(0,0,0,0);
 
-        :hover{
-                cursor: pointer;
-                background-color:#169E97;
-                box-shadow: -40px 0px 0px rgba(255, 255, 255, 0.9);
-            }
+         :hover{
+            cursor: pointer;
+            background-color:#169E97;
+            border: 2px solid white;
+}
 
 `
 

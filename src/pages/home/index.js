@@ -25,10 +25,10 @@ const Home = () => {
 
       <Menu>
         <ul>
-          <li><LinkMenu to='/CadastrarJovem'>Nova Admissão <RiUserAddFill/> </LinkMenu> </li>
-          <li><LinkMenu to='/Admissoes'>Admissões <FaThList/></LinkMenu></li>
-          <li><LinkMenu to='/ListarJovens'>Aprendizes <RiUserSearchFill/></LinkMenu></li>
-          <li><LinkMenu to='/CadastrarEmpresa'>Empresas <IoBusiness/></LinkMenu></li>
+          <li><LinkMenu className="btn-menu" to='/CadastrarJovem'>Nova Admissão <RiUserAddFill/> </LinkMenu> </li>
+          <li><LinkMenu className="btn-menu" to='/Admissoes'>Admissões <FaThList/></LinkMenu></li>
+          <li><LinkMenu className="btn-menu" to='/ListarJovens'>Aprendizes <RiUserSearchFill/></LinkMenu></li>
+          <li><LinkMenu className="btn-menu" to='/CadastrarEmpresa'>Empresas <IoBusiness/></LinkMenu></li>
         </ul>
       </Menu>
 
