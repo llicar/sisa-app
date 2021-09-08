@@ -18,9 +18,9 @@ import { Title } from '../../components/title'
 
 import JovemService from '../../services/jovens'
 import ModalForm from '../../components/modal'
-import FormNote from '../../components/formNote'
 
 import estados from '../../utils/estados.json'
+import { useModal } from '../../contexts/modalContext';
 
 
 yup.setLocale({
@@ -112,13 +112,10 @@ const CadastrarJovem_3 = () => {
     const [state, setState] = useState("");// Estado
     const [neighborhood, setNeighborhood] = useState("");// Bairro
     const [street, setStreet] = useState("");// Rua
-    const [isNote, setIsNote] = useState(false);// Armazena o estado que define se é para fazer uma anotação ou não
     const [formData, setFormData] = useState(""); // Armazena os dados do formulário
     const [jovem, setJovem] = useState([{}]); // Armazena os dados do jovem
-    const [anotacao, setAnotacao] = useState({});//Armazena os dados da anotação
 
-    const [isModalVisible, setIsModalVisible] = useState(false);// Controla a visibilidade do modal
-    const [isNoteVisible, setIsNoteVisible] = useState(false);//Controla a visibilidade formulário de anotações
+    const {isModalVisible, setIsModalVisible} = useModal();// Controla a visibilidade do modal
 
     const { register, handleSubmit, errors, control } = useForm({
         resolver: yupResolver(validationSchema)
@@ -153,24 +150,9 @@ const CadastrarJovem_3 = () => {
         async function buscarDados() {
             const response = await JovemService.show(params.id);
             setJovem(response.data[0])
-            
-            //Verifica se é para fazer uma anotação ou não
-            if(response.data[0].etapa >=3){
-                setIsNoteVisible(true)
-                setIsNote(true)
-            }
         }
         buscarDados();
     }, [params.id])
-
-    /**
-     * Captura os dados do formulário de anotação e insere no estado {anotacoes}
-     * @param {*} data dados da anotação
-     */
-         function handleAnotacao(data) {
-            setIsNoteVisible(false) //Esconde o formulário de anotação
-            setAnotacao(data)
-        }
 
     /**
      * Invoca modal e armazenando os dados do formulario do estado Formdata
@@ -441,18 +423,9 @@ const CadastrarJovem_3 = () => {
                 title={'Tudo Certo?'}
                 service={JovemService.update2}
                 data={formData}
-                dataNote={anotacao}
                 paramId={params.id}
-                isNote={isNote}
-                isNoteVisible={isNoteVisible}
-                onClose={() => {
-                    setIsModalVisible(false)
-                }}
-            >
-                {
-                    isNoteVisible ? 
-                    <FormNote handleAnotacao={handleAnotacao} />
-                    :
+                type={'default'}
+                >
                     <div className="resumoContainer">
                         <div className="tag">
                             <h2>RG</h2>
@@ -462,7 +435,7 @@ const CadastrarJovem_3 = () => {
                             <h2>Oficio</h2>
                         </div>
 
-                        <div className="data">
+                        <div className="valuesInfo">
                             <h2>{formData.rg}</h2>
                             <h2>{formData.cpf}</h2>
                             <h2>{formData.ja}</h2>
@@ -470,7 +443,7 @@ const CadastrarJovem_3 = () => {
                             <h2>{formData.oficio}</h2>
                         </div>
                     </div>
-                }
+                
                 </ModalForm> :
                 false
             }

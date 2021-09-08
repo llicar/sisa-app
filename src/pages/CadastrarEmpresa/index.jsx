@@ -21,6 +21,7 @@ import { Title } from '../../components/title';
 import { InputText } from '../../components/input';
 import { InputContainer } from '../../components/inputContainer';
 import ModalForm from '../../components/modal';
+import { useModal } from '../../contexts/modalContext';
 
 
 // Esquema de validação para os campos dos formulários
@@ -101,7 +102,7 @@ const FormEmpresa = () => {
     const [formData, setFormData] = useState(""); // Armazena os dados do formulario
     const [modalidade, setModalidade] = useState(""); // Armazena a modalidade do contrato 
 
-    const [isModalVisible, setIsModalVisible] = useState(false); // Controla visibilidade do modal
+    const {isModalVisible, setIsModalVisible} = useModal(); // Controla visibilidade do modal
 
     const { register, handleSubmit, errors, control } = useForm({
         resolver: yupResolver(validationSchema)
@@ -351,10 +352,10 @@ const FormEmpresa = () => {
                         <label>Almoço</label>
                         <select name="almoco" ref={register}>
                             <option value="" disable selected >Selecione..</option>
-                            <option value="0">NÃO</option>
-                            <option value="1">00:15</option>
-                            <option value="2">01:00</option>
-                            <option value="3">01:30</option>
+                            <option value="NÃO">NÃO</option>
+                            <option value="00:15">00:15</option>
+                            <option value="01:00">01:00</option>
+                            <option value="01:30">01:30</option>
                         </select>
                         <span className="erro"> {errors.almoco?.message} </span>
                     </InputText>
@@ -369,9 +370,7 @@ const FormEmpresa = () => {
                  title={'Tudo Certo?'}
                  service={EmpresaService.create}
                  data={formData}
-                 onClose={() => {
-                     setIsModalVisible(false)
-                 }}
+                 type={'default'}
              >
                  <div className="resumoContainer">
                     <div className="tag">
@@ -382,7 +381,7 @@ const FormEmpresa = () => {
                         <h2>Modalidade</h2>
                     </div>
 
-                    <div className="data">
+                    <div className="valuesInfo">
                         <h2>{formData.razaosocial}</h2>
                         <h2>{formData.cnpj}</h2>
                         <h2>{formData.ic}</h2>

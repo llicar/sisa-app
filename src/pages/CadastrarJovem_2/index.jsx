@@ -18,6 +18,7 @@ import JovemService from '../../services/jovens'
 import ModalForm from '../../components/modal'
 import dataFormat from '../../utils/dataFormat'
 import FormNote from '../../components/formNote'
+import { useModal } from '../../contexts/modalContext';
 
 
 yup.setLocale({
@@ -61,11 +62,10 @@ const CadastrarJovem_2 = () => {
     const [jovem, setJovem] = useState([{}]);//Armazena dados do jovem vindo da API
     const [datasFormatadas, setDatasFormatadas] = useState({}) //Armazena as datas formatadas
     const [formData, setFormData] = useState("");//Armazena os dados prontos para enviar para a API
-    const [anotacao, setAnotacao] = useState({});//Armazena os dados da anotação
-    const [isNote, setIsNote] = useState(false);//Armazena o estado que define se é para fazer uma anotação ou não
+    const [modalType, setModalType] = useState('default');//Armazena o estado que define se é para fazer uma anotação ou não
 
-    const [isModalVisible, setIsModalVisible] = useState(false);//Controla a visibilidade do modal
-    const [isNoteVisible, setIsNoteVisible] = useState(false);//Controla a visibilidade formulário de anotações
+    const {isModalVisible, setIsModalVisible} = useModal(false);//Controla a visibilidade do modal
+    const {isNoteVisible, setIsNoteVisible} = useModal(false);//Controla a visibilidade formulário de anotações
     const [fileName, setFileName] = useState('Clique para selecionar');//Controla o nome que aparecera no Input File
    
     
@@ -80,9 +80,9 @@ const CadastrarJovem_2 = () => {
             const response = await JovemService.show(params.id)
             setJovem(response.data[0]);
 
-            if(response.data[0].etapa >=2){
+            if(response.data[0].inclusao_calendario){
                 setIsNoteVisible(true)
-                setIsNote(true)
+                setModalType('note')
             }
 
             const datas = {             
@@ -96,15 +96,6 @@ const CadastrarJovem_2 = () => {
 
         buscarDados();
     }, [params.id,jovem.etapa])
-
-    /**
-     * Captura os dados do formulário de anotação e insere no estado {anotacoes}
-     * @param {*} data dados da anotação
-     */
-    function handleAnotacao(data) {
-        setIsNoteVisible(false) //Esconde o formulário de anotação
-        setAnotacao(data)
-    }
 
    /**
     * Captura dos dados do formulario e insere no estado {FormData}
@@ -235,20 +226,15 @@ const CadastrarJovem_2 = () => {
                     title={'Tudo Certo?'}
                     service={JovemService.update1}
                     data={formData}
-                    dataNote={anotacao}
                     paramId={params.id}
-                    isNote={isNote}
+                    type={modalType}
                     isNoteVisible={isNoteVisible}
-                    onClose={() => {
-                        setIsModalVisible(false)
-                    }}
-
                 >
 
                     {
                         isNoteVisible ? // verifica se o formulário de anotações é pra estar visivel
                         
-                            <FormNote handleAnotacao={handleAnotacao} />
+                            <FormNote/>
 
                             :
 

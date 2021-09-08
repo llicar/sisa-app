@@ -12,6 +12,7 @@ import md5 from 'md5';
 import Header from '../../components/header'
 import { Form } from '../../components/form'
 import ModalForm from '../../components/modal'
+import {useModal} from "../../contexts/modalContext"
 
 import { InputContainer } from '../../components/inputContainer'
 import { LinkMenu as DocButton } from "../home/style";
@@ -37,23 +38,23 @@ yup.setLocale({
     }
 })
 
+const ModalDesl = ModalForm;
+const Modal = ModalForm;
+
 const DetalheJovem = () => {
     const params = useParams();
 
     const [jovem, setJovem] = useState([{}]); // Armazena os dados do jovem
-    const [anotacao, setAnotacao] = useState({});//Armazena os dados da anotação feita
-    const [desligamento, setDesligamento] = useState({});//Armazena os dados da anotação feita
     const [dirtyValues, setDirtyValues] = useState([]) // Armazena os campos alterados
     const [anotacoes, setAnotacoes] = useState([{}]); // Armazena as anotações do jovem
     const [etapaJovem,setEtapaJovem] = useState(true); // Armazena a etapa jovem
     const [empresas, setEmpresas] = useState([{}]) // Armazena as empresas
     const [datasFormatadas, setDatasFormatadas] = useState({}) // Armazena as datas formatadas
 
-    
-    const [isModalDeslVisible, setModalDeslVisible] = useState(false);// Controla a visibilidade do modal
-    const [isFormDeslVisible, setIsFormDeslVisible] = useState(true);//Controla a visibilidade formulário de anotações
-    const [isModalVisible, setIsModalVisible] = useState();// Controla a visibilidade do modal
-    const [isNoteVisible, setIsNoteVisible] = useState();//Controla a visibilidade formulário de anotações
+    const {dataDesligamento} = useModal();    
+    const {isModalDeslVisible, setIsModalDeslVisible} = useModal();
+    const {isModalVisible, setIsModalVisible} = useModal();// Controla a visibilidade do modal
+    const {isNoteVisible, setIsNoteVisible} = useModal();//Controla a visibilidade formulário de anotações
     const [loadingCalendario,setLoadingCalendario] = useState(0); // Controla a visibilidade do loading do calendario
     const [loadingFinalizar,setLoadingFinalizar] = useState(0); // Controla a visibilidade do loading do finalizar
     const [fileName, setFileName] = useState('Clique para selecionar');//Controla o nome que aparecera no Input File
@@ -151,30 +152,9 @@ const DetalheJovem = () => {
     function handleModal(data) {
 
         setDirtyValues(getDirtyValues(dirtyFields, data))
+        setIsNoteVisible(true)
         setIsModalVisible(true)
 
-    }
-
-    /**
-     * Captura dos dados do formulario de anotações e insere no estado {Anotacoes}
-     * @param {*} data dados do formulário de anotações
-     */
-    function handleAnotacao(data) {
-        setIsNoteVisible(false)
-        setAnotacao(data)
-    }
-
-    function handleModalDesligamento(data) {
-        setModalDeslVisible(true)
-
-    }
-      /**
-     * Captura dos dados do formulario de desligamento e insere no estado {Anotacoes}
-     * @param {*} data dados do formulário de desligamento
-     */
-       function handleDesligamento(data) {
-        setIsNoteVisible(false)
-        setDesligamento(data)
     }
 
     /** 
@@ -223,7 +203,7 @@ const DetalheJovem = () => {
                                 <h3>Admissão</h3>
                                 <h4>{datasFormatadas.admissao}</h4>
                             </div>
-                            <button className="btnDesligar" disable value="disable"  onClick={() => {}/*handleModalDesligamento*/}>Desligar Jovem</button>
+                            <button className="btnDesligar" disable value="disable"  onClick={() => {setIsModalDeslVisible(true)}/*handleModalDesligamento*/}>Desligar Jovem</button>
                         </div>
 
                         <div className="cardDocs card">
@@ -813,57 +793,35 @@ const DetalheJovem = () => {
                 </div>
             </div>
 
-            { isModalDeslVisible ?
-                <ModalForm
-                    title={'Desligar Jovem'}
+            {
+                isModalDeslVisible ?
+                <ModalDesl
+                    title={"Desligar Jovem"}
                     paramId={params.id}
-                    data={dirtyValues}
-                    onClose={() => {
-                        setIsModalVisible(false)
-                        setIsNoteVisible(true)
-                    }}
-                    service={JovemService.update2}
-                    serviceNote={JovemService.createNote}
-                    dataNote={anotacao}
-                    isNoteVisible={isNoteVisible}
-                    isNote={true}
-                    rFail="Ops, algo deu errado :("
-                    rSuccess="Desligamento realizado!"
-                >
+                    data={dataDesligamento}
+                    service={JovemService.desligarJovem}
+                    type={'default'}
+                    >
+                        <FormDesligamento/>
+                </ModalDesl>
+                : false
 
-                    {
-                        isFormDeslVisible ?
-
-                            <FormDesligamento handleDesligamento={handleDesligamento} />
-
-                            :false
-                    }
-                </ModalForm> :
-                false
             }
 
-            { isModalVisible ?
-                <ModalForm
+            { isModalVisible?
+                <Modal
                     title={'Alterar Dados?'}
-                    onClose={() => {
-                        setIsModalVisible(false)
-                        setIsNoteVisible(true)
-                    }}
                     paramId={params.id}
                     data={dirtyValues}
                     service={JovemService.update2}
                     serviceNote={JovemService.createNote}
-                    dataNote={anotacao}
-                    isNoteVisible={isNoteVisible}
-                    isNote={true}
-                    rFail="Ops, algo deu errado :("
-                    rSuccess="Alterado com suscesso!!"
+                    type={'note'}
                 >
 
                     {
                         isNoteVisible ?
 
-                            <FormNote handleAnotacao={handleAnotacao} />
+                            <FormNote/>
 
                             :
 
@@ -885,7 +843,7 @@ const DetalheJovem = () => {
                                 </div>
                             </div>
                     }
-                </ModalForm> :
+                </Modal> :
                 false
             }
         </body>

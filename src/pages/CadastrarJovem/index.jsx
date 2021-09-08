@@ -16,6 +16,7 @@ import EmpresaService from '../../services/empresas'
 import JovemService from '../../services/jovens'
 import ModalForm from '../../components/modal'
 import dataFormat from '../../utils/dataFormat'
+import { useModal } from '../../contexts/modalContext';
 
 
 yup.setLocale({
@@ -51,6 +52,15 @@ const validationSchema = yup.object().shape({
     inicial: yup
         .string()
         .required(),
+    mae: yup
+        .string()
+        .required(),
+    pai: yup
+        .string()
+        .required(),
+    escolaridade: yup
+        .string()
+        .required(),
 })
 
 
@@ -59,7 +69,7 @@ const CadastrarJovem = () => {
     const [formData, setFormData] = useState(""); // Armazena os dados do formulário
     const [empresas, setEmpresas] = useState([]);// Armazena as empresas
 
-    const [isModalVisible, setIsModalVisible] = useState(false); // Controla a visibilidade do modal
+    const {isModalVisible, setIsModalVisible} = useModal(); // Controla a visibilidade do modal
     
     const { register, handleSubmit, errors, control } = useForm({
         resolver: yupResolver(validationSchema)
@@ -291,7 +301,7 @@ const CadastrarJovem = () => {
                         <span className="erro"> {errors.cpf_pai?.message} </span>
                     </InputText>
                 </InputContainer>
-
+                <hr/>
                 <InputContainer>
                     <InputText w={100}>
                         <label>Responsável Legal</label>
@@ -332,9 +342,7 @@ const CadastrarJovem = () => {
                     title={'Tudo Certo?'}
                     service={JovemService.create}
                     data={formData}
-                    onClose={() => {
-                        setIsModalVisible(false)
-                    }}
+                    type={'default'}
                 >
                             <div className="resumoContainer">                             
                                 <div className="tag">
@@ -344,7 +352,7 @@ const CadastrarJovem = () => {
                                 <h2>Jornada</h2>
                                 </div>
 
-                                <div className="data">
+                                <div className="valuesInfo">
                                 <h2>{formData.nome}</h2>
                                 <h2>{dataFormat.fullDateBR(formData.admissao)}</h2>
                                 <h2>{formData.dia_ap}</h2>
