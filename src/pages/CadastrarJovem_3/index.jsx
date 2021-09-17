@@ -99,9 +99,39 @@ const validationSchema = yup.object().shape({
     jae: yup
         .string()
         .required(),
+
+    ja: yup
+        .string()
+        .required(),
+
+    matri_ap: yup
+        .string()
+        .required(),
+
+    mae: yup
+        .string()
+        .required(),
+
+    pai: yup
+        .string()
+        .required(),
+
+    escolaridade: yup
+        .string()
+        .required(),
+
+    oficio: yup
+        .string()
+        .required(),
+
+    data_oficio: yup
+        .string()
+        .required(),
+
+    bilhete_unico: yup
+        .string()
+        .required(),
 })
-
-
 
 const CadastrarJovem_3 = () => {
     const params = useParams();
@@ -271,6 +301,90 @@ const CadastrarJovem_3 = () => {
                     </InputText>
                 </InputContainer>
 
+                <h2>Responsáveis</h2>
+                <hr />
+
+                <InputContainer>    
+                    <InputText w={100}>
+                        <label>Quem irá assinar a documentação?</label>
+                        <select name='opc_responsavel' ref={register}>
+                            <option valeu="">Selecione...</option>
+                            <option valeu="mae">MÃE</option>
+                            <option valeu="pai">PAI</option>
+                            <option valeu="responsavel"> RESPOSÁVEL</option>
+                        </select>
+                        <span className="erro"> {errors.opc_responsavel?.message} </span>
+                    </InputText>
+                </InputContainer>
+
+                <InputContainer>
+                    <InputText w={100}>
+                        <label>Mãe</label>
+                        <input name='mae' ref={register} />
+                        <span className="erro"> {errors.mae?.message} </span>
+                    </InputText>
+                </InputContainer>
+
+                <InputContainer>
+                    <InputText w={45}>
+                        <label>CPF da Mãe</label>
+                        <Controller as={InputMask} control={control} mask="999.999.999-99" name='cpf_mae' ref={register} />
+                        <span className="erro"> {errors.cpf_mae?.message} </span>
+                    </InputText>
+
+                    <InputText w={45}>
+                        <label>RG da Mãe</label>
+                        <input name='rg_mae' ref={register} />
+                        <span className="erro"> {errors.rg_mae?.message} </span>
+                    </InputText>
+                </InputContainer>
+
+                <InputContainer>
+                    <InputText w={100}>
+                        <label>Pai</label>
+                        <input name='pai' ref={register} />
+                        <span className="erro"> {errors.pai?.message} </span>
+                    </InputText>
+                </InputContainer>
+
+                <InputContainer>
+                    <InputText w={45}>
+                        <label>CPF da Pai</label>
+                        <Controller as={InputMask} control={control} mask="999.999.999-99" name='cpf_pai' ref={register} />
+                        <span className="erro"> {errors.cpf_pai?.message} </span>
+                    </InputText>
+
+                    <InputText w={45}>
+                        <label>RG da Pai</label>
+                        <input name='rg_pai' ref={register} />
+                        <span className="erro"> {errors.cpf_pai?.message} </span>
+                    </InputText>
+                </InputContainer>
+                <hr/>
+                <InputContainer>
+                    <InputText w={100}>
+                        <label>Responsável Legal</label>
+                        <p className='info'>* Só é nescessário preencher caso os pais não tiverem a guarda do jovem</p>
+                        <input name='responsavel_legal' ref={register} />
+                        <span className="erro"> {errors.responsavel_legal?.message} </span>
+
+                    </InputText>
+                </InputContainer>
+
+                <InputContainer>
+                    <InputText w={45}>
+                        <label>CPF Responsável</label>
+                        <Controller as={InputMask} control={control} mask="999.999.999-99" name='cpf_responsavel_legal' ref={register} />
+                        <span className="erro"> {errors.cpf_responsavel_legal?.message} </span>
+                    </InputText>
+
+                    <InputText w={45}>
+                        <label>RG Responsável</label>
+                        <input name='rg_responsavel_legal' ref={register} />
+                        <span className="rg_responsavel_legal"> {errors.cpf_pai?.message} </span>
+                    </InputText>
+                </InputContainer>
+
                 <h2>Endereço</h2>
                 <hr />
 
@@ -370,7 +484,19 @@ const CadastrarJovem_3 = () => {
                 </InputContainer>
 
                 <InputContainer>
-                    <InputText w={45}>
+                    <InputText w={30}>
+                        <label>Escolaridade</label>
+                        <select name='escolaridade' ref={register}>
+                            <option value="">Selecione...</option>
+                            <option value="1 ANO">1 ANO</option>
+                            <option value="2 ANO">2 ANO</option>
+                            <option value="3 ANO">3 ANO</option>
+                            <option value="MEDIO COMPLETO">MÉDIO COMPLETO</option>
+                        </select>
+                        <span className="erro"> {errors.escolaridade?.message} </span>
+                    </InputText>
+
+                    <InputText w={30}>
                         <label>Periodo escolar</label>
                         <select name='periodo' ref={register}>
                             <option value="">Selecione...</option>
@@ -381,7 +507,7 @@ const CadastrarJovem_3 = () => {
                         <span className="erro"> {errors.periodo?.message} </span>
                     </InputText>
 
-                    <InputText w={45}>
+                    <InputText w={30}>
                         <label>RA</label>
                         <input name='ra' ref={register} />
                         <span className="erro"> {errors.ra?.message} </span>
@@ -392,6 +518,18 @@ const CadastrarJovem_3 = () => {
                 <hr />
 
                 <InputContainer>
+                    <InputText w={30}>
+                        <label>Chapa</label>
+                        <input name='matri_ap' maxlength="6" ref={register} />
+                        <span className="erro"> {errors.matri_ap?.message} </span>
+                    </InputText>
+
+                    <InputText w={30}>
+                        <label>J.A</label>
+                        <Controller as={InputMask} control={control} mask="99/999" name='ja' ref={register} />
+                        <span className="erro"> {errors.ja?.message} </span>
+                    </InputText>
+
                     <InputText w={30}>
                         <label>J.A.E</label>
                         <Controller as={InputMask} control={control} mask="99/999" name='jae' ref={register} />
