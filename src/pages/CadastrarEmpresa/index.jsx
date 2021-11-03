@@ -321,7 +321,7 @@ const FormEmpresa = () => {
                 <InputContainer>
 
                     <InputText w={40}>
-                        <label>Vale Refeição</label>
+                        <label>Alimentação</label>
                         <select name='vr' ref={register}>
                             <option value="" disable selected >Selecione..</option>
                             <option value="SIM">Sim</option>
@@ -331,7 +331,7 @@ const FormEmpresa = () => {
                     </InputText>
                     <InputText w={40}>
                         <label>Valor</label>
-                        <Controller as={InputMask} control={control} mask="R$ 99,99" name='vr_valor' ref={register} />
+                        <Controller as={InputMask} control={control} maskname='vr_valor' ref={register} />
                         <span className="erro"> {errors.vr_valor?.message} </span>
                     </InputText>
                 </InputContainer>
