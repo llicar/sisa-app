@@ -331,7 +331,7 @@ const FormEmpresa = () => {
                     </InputText>
                     <InputText w={40}>
                         <label>Valor</label>
-                        <Controller as={InputMask} control={control} maskname='vr_valor' ref={register} />
+                        <Controller as={InputMask} control={control} name='vr_valor' ref={register} />
                         <span className="erro"> {errors.vr_valor?.message} </span>
                     </InputText>
                 </InputContainer>
