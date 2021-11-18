@@ -82,8 +82,9 @@ const generateDocument = (data,doc,datasFormatadas) => {
 
   const defineSitImovel = (sit) =>{
     let sitImovel = {}
+    console.log(sit)
 
-    if(sit === "proprio") {
+    if(sit === "PROPRIO") {
         sitImovel ={
           proprioX : "X",
           alugadoX : "",
@@ -91,7 +92,7 @@ const generateDocument = (data,doc,datasFormatadas) => {
           financiadoX:""
         }
     }
-    else if (sit === "alugado") {
+    else if (sit === "ALUGADO") {
       sitImovel = {
         proprioX : "",
         alugadoX : "X",
@@ -99,7 +100,7 @@ const generateDocument = (data,doc,datasFormatadas) => {
         financiadoX:""
      }
     }
-    else if (sit === "cedido") {
+    else if (sit === "CEDIDO") {
       sitImovel = {
         proprioX : "",
         alugadoX : "",
