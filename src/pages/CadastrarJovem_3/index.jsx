@@ -311,7 +311,7 @@ const CadastrarJovem_3 = () => {
                             <option valeu="">Selecione...</option>
                             <option valeu="mae">MÃE</option>
                             <option valeu="pai">PAI</option>
-                            <option valeu="responsavel"> RESPOSÁVEL</option>
+                            <option valeu="responsavel">RESPONSÁVEL</option>
                         </select>
                         <span className="erro"> {errors.opc_responsavel?.message} </span>
                     </InputText>
