@@ -110,6 +110,8 @@ const DetalheJovem = () => {
                 isoInicioEmp: dataFormat.iso(response.data[0].inicio_emp),
                 isoTerminoEmp: dataFormat.iso(response.data[0].termino_emp),
                 isoDemissao: dataFormat.iso(response.data[0].demissao),
+                isoInicioFerias: dataFormat.iso(response.data[0].inicio_ferias),
+                isoFimFerias: dataFormat.iso(response.data[0].fim_ferias),
                 isoEmissaoRg: dataFormat.iso(response.data[0].emissao_rg),
                 isoDataOficio: dataFormat.iso(response.data[0].data_oficio),
                 isoDataNascimento: dataFormat.iso(response.data[0].data_nascimento)
@@ -232,7 +234,6 @@ const DetalheJovem = () => {
                                             Contrato
                                         </DocButton>
                                     }
-                                    
                                 </div>
                                 
                                 <form className="form-calendario"  enctype="multipart/form-data" onSubmit={handleSubmit(handleCalendario)}>
@@ -446,6 +447,20 @@ const DetalheJovem = () => {
                                 <label>Demissão</label>
                                 <input name='demissao' type="date" defaultValue={datasFormatadas.isoDemissao} ref={register} />
                                 <span className="erro"> {errors.demissao?.message} </span>
+                            </InputText>
+                        </InputContainer>
+
+                        <InputContainer>
+                            <InputText w={45}>
+                                <label>Inicio das férias</label>
+                                <input name='inicio_ferias' type="date" defaultValue={datasFormatadas.isoInicioFerias} ref={register} />
+                                <span className="erro"> {errors.inicio_ferias?.message} </span>
+                            </InputText>
+
+                            <InputText w={45}>
+                                <label>Fim das férias</label>
+                                <input name='fim_ferias' type="date" defaultValue={datasFormatadas.isoFimFerias} ref={register} />
+                                <span className="erro"> {errors.fim_ferias?.message} </span>
                             </InputText>
                         </InputContainer>
 

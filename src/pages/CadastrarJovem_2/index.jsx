@@ -84,16 +84,17 @@ const CadastrarJovem_2 = () => {
                 setIsNoteVisible(true)
                 setModalType('note')
             }
-
             const datas = {             
                 isoAdmissao: dataFormat.iso(response.data[0].admissao),
                 isoInicioEmp: dataFormat.iso(response.data[0].inicio_emp),
                 isoTerminoEmp: dataFormat.iso(response.data[0].termino_emp),
-                isoDemissao: dataFormat.iso(response.data[0].demissao)
+                isoDemissao: dataFormat.iso(response.data[0].demissao),
+                isoIncioFerias: dataFormat.iso(response.data[0].inicio_ferias),
+                isoFimFerias: dataFormat.iso(response.data[0].fim_ferias)
             }
             setDatasFormatadas(datas) 
+            console.log(datas)
         }
-
         buscarDados();
     }, [params.id,jovem.etapa])
 
@@ -174,13 +175,13 @@ const CadastrarJovem_2 = () => {
                 <InputContainer>
                     <InputText w={45}>
                         <label>Inicio férias</label>
-                        <input name='inicio_ferias' type="date" defaultValue={datasFormatadas.inicio_ferias} ref={register} />
+                        <input name='inicio_ferias' type="date" defaultValue={datasFormatadas.isoIncioFerias} ref={register} />
                         <span className="erro"> {errors.inicio_ferias?.message} </span>
                     </InputText>
 
                     <InputText w={45}>
                         <label>Fim férias</label>
-                        <input name='fim_ferias' type="date" defaultValue={datasFormatadas.fim_ferias} ref={register} />
+                        <input name='fim_ferias' type="date" defaultValue={datasFormatadas.isoFimFerias} ref={register} />
                         <span className="erro"> {errors.fim_ferias?.message} </span>
                     </InputText>
                 </InputContainer>
