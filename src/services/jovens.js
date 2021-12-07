@@ -9,6 +9,10 @@ class JovemService {
         return await api.get("/jovens")
     }
 
+    async inventario() {
+        return await api.get("/inventario")
+    }
+
     async show(id) {
         return await api.get(`/jovem/${id}`)
     }
@@ -40,8 +44,13 @@ class JovemService {
     async deletarAdmissao(id) {
         return await api.post(`/deletarAdmissao/${id}`);
     }
+
     async desligarJovem(data,id) {
         return await api.post(`/desligarJovem/${id}`,data);
+    }
+
+    async buscarJovensPorEmpresa(idEmpresa) {
+        return await api.get(`/jovensPorEmpresa/${idEmpresa}`);
     }
 }
 

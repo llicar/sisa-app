@@ -13,6 +13,7 @@
     "docxtemplater": "^3.20.0",
     "dotenv": "^8.2.0",
     "eslint-plugin-react-hooks": "^0.0.0-0cf9fc10b",
+    "exceljs": "^4.3.0",
     "extenso": "^2.0.1",
     "file-saver": "^2.0.5",
     "icons": "^1.0.0",

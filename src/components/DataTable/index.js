@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import { useState } from 'react'
 import { InputText } from '../../components/input'
+import exportarInventario from '../../utils/exportarInventario.js'
+
+import excelIcon from '../../assets/icons/excel.svg'
 
 const Table = styled.table`
 
@@ -40,6 +43,33 @@ const Container = styled.div`
     width: 80%;
     padding:20px;
     border-radius:10px;
+
+    .nav{
+        display: flex;
+        align-items:center;
+
+        button{
+            margin-left: 50px;
+            height:45px;
+            margin-top:20px;
+            width:170px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size:20px;
+            background-color: #1EC3BA;
+            border: none;
+            border-radius:6px;
+            padding-inline: 10px;
+            font-family: roboto;
+            font-weight:bold;
+            color: #fff;
+
+            :hover{
+                cursor: pointer;
+            }
+        }
+    }
    
 `
 
@@ -62,9 +92,9 @@ const TableContainer = styled.div`
         border-radius:5px;
         color:white;
         font-size:18px;
-        font-family:Roboto-Regular;
-        text-indent:10px;
-    }
+        font-family:Roboto;
+        
+    }   
 
    
 
@@ -93,6 +123,7 @@ const DataTable = ({ data }) => {
 
         <Container>
 
+            <div className="nav">
             <InputText style={{ width: '350px', marginLeft: '8px' }}>
                 <label style={{ fontWeight: 'bold', fontSize: '22px' }}>Pesquisar por Nome ou Empresa</label>
                 <input
@@ -105,6 +136,8 @@ const DataTable = ({ data }) => {
                     } />
 
             </InputText>
+            <button onClick={exportarInventario}>Exportar<img src={excelIcon} alt="baixar inventario"/></button>
+            </div>
 
             <TableContainer>
 

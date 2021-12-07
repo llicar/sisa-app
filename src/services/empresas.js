@@ -9,6 +9,10 @@ class EmpresaService {
     async index () {
         return await api.get("/empresas");
     }
+    
+    async buscarEmpresaPorId (id) {
+        return await api.get(`/empresas/${id}`);
+    }
 
    }
 
