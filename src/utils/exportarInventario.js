@@ -11,6 +11,10 @@ async function exportarInventario(){
     workbook.creator = '@sisa';
     workbook.lastModifiedBy = '@sisa';
 
+    workbook.created = new Date(1985, 8, 30);
+    workbook.modified = new Date();
+    workbook.lastPrinted = new Date(2016, 9, 27);
+
     workbook.properties.date1904 = true;
 
     workbook.views = [
@@ -126,7 +130,7 @@ async function exportarInventario(){
     sheet.addRows(jovens.data);
 
     workbook.xlsx.writeBuffer()
-    .then(buffer => saveAs(new Blob([buffer]), `${Date.now()}_feedback.xlsx`))
+    .then(buffer => saveAs(new Blob([buffer]), `inventário_${Date.now()}.xlsx`))
     .catch(err => console.log('Error writing excel export', err))
     }
         
