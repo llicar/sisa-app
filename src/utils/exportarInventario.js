@@ -15,8 +15,6 @@ async function exportarInventario(){
     workbook.modified = new Date();
     workbook.lastPrinted = new Date(2016, 9, 27);
 
-    workbook.properties.date1904 = true;
-
     workbook.views = [
     {
             x: 0, y: 0, width: 10000, height: 20000,

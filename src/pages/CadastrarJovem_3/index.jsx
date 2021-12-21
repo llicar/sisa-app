@@ -243,13 +243,13 @@ const CadastrarJovem_3 = () => {
                 </InputContainer>
 
                 <InputContainer>
-                    <InputText w={55}>
+                    <InputText w={45}>
                         <label>Municipio de nascimento</label>
                         <input name='cidade_nascimento' ref={register} />
                         <span className="erro"> {errors.cidade_nascimento?.message} </span>
                     </InputText>
 
-                    <InputText w={35}>
+                    <InputText w={45}>
                         <label>Estado</label>
                         <select name='estado_nascimento' ref={register}>
                             <option value="">Selecione...</option>
@@ -263,6 +263,15 @@ const CadastrarJovem_3 = () => {
                         </select>
                         <span className="erro"> {errors.estado_nascimento?.message} </span>
                     </InputText>
+                </InputContainer>
+
+                
+                <InputContainer>
+                    <InputText w={100}>
+                        <label>Telefones</label>
+                        <Controller as={InputMask} control={control} name='fone1' ref={register} />
+                        <span className="erro"> {errors.fone1?.message} </span>
+                </InputText>
                 </InputContainer>
 
                 <InputContainer>
@@ -284,20 +293,6 @@ const CadastrarJovem_3 = () => {
                         <label>Série</label>
                         <input name='serie' ref={register} />
                         <span className="erro"> {errors.serie?.message} </span>
-                    </InputText>
-                </InputContainer>
-
-                <InputContainer>
-                    <InputText w={45}>
-                        <label>Telefone 1</label>
-                        <Controller as={InputMask} control={control} mask="(99) 99999-9999" name='fone1' ref={register} />
-                        <span className="erro"> {errors.fone1?.message} </span>
-                    </InputText>
-
-                    <InputText w={45}>
-                        <label>Telefone 2</label>
-                        <Controller as={InputMask} control={control} mask="(99) 99999-9999" name='fone2' ref={register} />
-                        <span className="erro"> {errors.fone2?.message} </span>
                     </InputText>
                 </InputContainer>
 
@@ -540,7 +535,7 @@ const CadastrarJovem_3 = () => {
                 <InputContainer>
                     <InputText w={45}>
                         <label>Oficio</label>
-                        <Controller as={InputMask} control={control} mask="9999/999" name='oficio' ref={register} />
+                        <Controller as={InputMask} control={control} name='oficio' ref={register} />
                         <span className="erro"> {errors.oficio?.message} </span>
                     </InputText>
 
