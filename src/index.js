@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom';
 import Routes from './routes.js';
 import reportWebVitals from './reportWebVitals';
 import ModalProvider from "./contexts/modalContext"
+import HeaderProvider from "./contexts/headerContext"
 
 
 ReactDOM.render(
   <React.StrictMode>
+    <HeaderProvider>
     <ModalProvider>
       <Routes />
     </ModalProvider>
+    </HeaderProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

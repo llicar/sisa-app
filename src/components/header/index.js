@@ -1,19 +1,43 @@
+
+import { useHeader } from '../../contexts/headerContext';
+
 import {HeaderStyle} from './style' 
 import {Col,Row} from 'react-bootstrap'
+import {IoMenuOutline} from 'react-icons/io5'
 
 import logo from '../../assets/images/logo_aedha.svg'
 
 import {BotaoMenu,BotaoSair} from '../BotaoHeader'
 
+import Menu from '../menu';
+
 
 const Header =  () => {
+
+    const {isMenuVisible, setIsMenuVisible} = useHeader();
+
     return (
+        <>
+        {
+            isMenuVisible?<Menu/>:false
+        }
         <Row>
         <HeaderStyle>
-            <Col>
-            <img src={logo} alt='logo aedha'/>
+            <Col className="col">
+                {
+                    isMenuVisible?false:
+                    <>
+                        <IoMenuOutline 
+                            className="iconeMenu" 
+                            size={40}
+                            onClick={()=>setIsMenuVisible(true)}
+                        />
+                        <img src={logo} alt='logo aedha'/>
+                    </>
+
+                }   
             </Col>
-            <Col style={{display: 'flex'}}>
+            <Col className="col">
                 <Col>
                 <BotaoMenu to='/Home'>INICIO</BotaoMenu>
                 </Col>
@@ -23,6 +47,7 @@ const Header =  () => {
             </Col>
         </HeaderStyle>
           </Row>
+          </>
     )
 }
 

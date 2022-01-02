@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams} from 'react-router-dom';
 import dotenv from 'dotenv';
 
 import { useForm } from 'react-hook-form'
@@ -43,7 +43,6 @@ const Modal = ModalForm;
 
 const DetalheJovem = () => {
     const params = useParams();
-
     const [jovem, setJovem] = useState([{}]); // Armazena os dados do jovem
     const [dirtyValues, setDirtyValues] = useState([]) // Armazena os campos alterados
     const [anotacoes, setAnotacoes] = useState([{}]); // Armazena as anotações do jovem

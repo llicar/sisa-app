@@ -34,7 +34,7 @@ const Login = () => {
         <body>
         <HeaderLogin>
             <img src={logo} alt='logo aedha'/>
-            <h1>SisA</h1>
+            <h1>SISA</h1>
         </HeaderLogin>
 
         <ContainerLogin>

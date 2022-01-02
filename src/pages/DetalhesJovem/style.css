@@ -171,7 +171,6 @@
 .containerContratos{
     display: flex;
     flex-direction:column;
-    z-index: 1;
     height:50px;
     margin-bottom: 18px;
 }

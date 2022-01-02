@@ -10,15 +10,15 @@ body{
         
 @font-face{
     font-family: 'Roboto-Light';
-    src: local('Roboto'), url(assets/fonts/Roboto-Light.ttf) format('truetype');
+    src: local('Roboto-Light'), url(assets/fonts/Roboto-Light.ttf) format('truetype');
 }
 
 @font-face{
     font-family: 'Roboto-Regular';
-    src: local('Roboto'), url(assets/fonts/Roboto-Regular.ttf) format('truetype');
+    src: local('Roboto-Regular'), url(assets/fonts/Roboto-Regular.ttf) format('truetype');
 }
 
 @font-face{
     font-family: 'Roboto-Thin';
-    src: local('Roboto'), url(assets/fonts/Roboto-Thin.ttf) format('truetype');
+    src: local('Roboto-Thin'), url(assets/fonts/Roboto-Thin.ttf) format('truetype');
 }

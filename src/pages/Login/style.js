@@ -11,11 +11,10 @@ margin-top:15vh;
             display:block;
         }
 
-
 h1{
     text-align:center;
     margin-bottom:50px;
-    font-family:Roboto;
+    font-family:'Roboto-Thin';
     color:white;
     font-size:46px;
 }
@@ -29,7 +28,7 @@ align-items:center;
 
 h1{
     color:white;
-    font-family:Roboto;
+    font-family:Roboto-Thin;
     margin-left:20px;
 }
 

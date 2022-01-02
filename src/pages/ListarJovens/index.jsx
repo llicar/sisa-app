@@ -12,20 +12,11 @@ import DotLoader from "react-spinners/DotLoader";
 import style from './style.css'
 
 
-
-
-
-
 const ListarJovens = () => {
-    
-
-
     
     const [data,setData] = useState([]);
     const [showLoader,setShowLoader] = useState(true);
-    
 
-    
     useEffect(() => {
         JovemService.index()
         .then( response => {
@@ -46,7 +37,6 @@ const ListarJovens = () => {
             setData(newData);
         })
     },[])  
-
 
     return (
         <body>
