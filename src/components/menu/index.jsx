@@ -6,7 +6,6 @@ import {IoMenuOutline} from 'react-icons/io5'
 import {IoPersonAddSharp} from 'react-icons/io5'
 import {IoSearchSharp} from 'react-icons/io5'
 import {IoDocumentText} from 'react-icons/io5'
-import {IoArrowBackCircleOutline} from 'react-icons/io5'
 
 import logoAedha from '../../assets/images/logo_aedha.svg'
 
@@ -21,8 +20,8 @@ const Menu = () =>{
     return(
         <MenuStyle>
             <header>
-                <IoArrowBackCircleOutline 
-                className="iconeMenu exit" 
+                <IoMenuOutline 
+                className="iconeMenu" 
                 size={40}
                 onClick={()=>setIsMenuVisible(false)}
                 />
