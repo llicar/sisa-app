@@ -59,6 +59,44 @@ header{
     }
 }
 
+.exit{
+    -webkit-animation:spin 0.5s linear  ;
+    -moz-animation:spin 0.5s  ;
+    animation:spin 0.5s  ;
+
+@-moz-keyframes spin { 
+  0%{
+      -moz-transform: rotate(-45deg); 
+      margin-left:-20px
+    }
+    100% { 
+      -webkit-transform: rotate(0deg); 
+      margin-left:0px
+    } 
+}
+@-webkit-keyframes spin { 
+    0%{
+      -moz-transform: rotate(-45deg); 
+      margin-left:-20px
+    }
+    100% { 
+      -webkit-transform: rotate(0deg); 
+      margin-left:0px
+    } 
+}
+@keyframes spin { 
+  0%{
+      -moz-transform: rotate(-45deg); 
+      margin-left:-20px
+    }
+    100% { 
+      -webkit-transform: rotate(0deg); 
+      margin-left:0px
+    } 
+}
+
+}
+
 ul{
     list-style: none;
     font-family: Roboto;
