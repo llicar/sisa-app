@@ -10,7 +10,7 @@ import { RiUserAddFill } from "react-icons/ri";
 import{ FaArrowCircleRight } from 'react-icons/fa'
 import { RiUserUnfollowFill } from 'react-icons/ri'
 
-import DotLoader from "react-spinners/DotLoader";
+import SquareLoader from "react-spinners/SquareLoader";
 import ModalForm from '../../components/modal';
 
 import JovemService from '../../services/jovens'
@@ -67,7 +67,7 @@ const Admissoes = () => {
                 {
                     loading?
                     <div style={{display: 'flex', margin: '0 auto',justifyContent: 'center',marginTop: '130px'}}>
-                        <DotLoader loading={loading} size={70} color={'#1EC3BA'} />
+                        <SquareLoader loading={loading} size={70} color={'#1EC3BA'} />
                     </div>:
                     total?
                     <TableContainer>
