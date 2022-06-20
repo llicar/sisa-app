@@ -4,7 +4,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import InputMask from 'react-input-mask';
 import ReactCepPromise from "react-cep-promise";
-import { validateCPF } from "validations-br";
+import { validateCPF, validatePIS  } from "validations-br";
+import dataFormat from "../../utils/dataFormat.js"
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -63,7 +64,12 @@ const validationSchema = yup.object().shape({
     fone1: yup
         .string()
         .required(),
-    
+
+    email_jovem: yup
+        .string()
+        .required(),
+
+        
     cep: yup
         .string()
         .required(),
@@ -104,10 +110,6 @@ const validationSchema = yup.object().shape({
         .string()
         .required(),
 
-    matri_ap: yup
-        .string()
-        .required(),
-
     mae: yup
         .string()
         .required(),
@@ -120,17 +122,6 @@ const validationSchema = yup.object().shape({
         .string()
         .required(),
 
-    oficio: yup
-        .string()
-        .required(),
-
-    data_oficio: yup
-        .string()
-        .required(),
-
-    bilhete_unico: yup
-        .string()
-        .required(),
 })
 
 const CadastrarJovem_3 = () => {
@@ -144,7 +135,9 @@ const CadastrarJovem_3 = () => {
     const [street, setStreet] = useState("");// Rua
     const [formData, setFormData] = useState(""); // Armazena os dados do formulário
     const [jovem, setJovem] = useState([{}]); // Armazena os dados do jovem
-
+    const [validadeAso, setValidadeAso] = useState(""); // Armazena os dados do jovem
+    const [aso, setAso] = useState(""); // Armazena os dados do jovem
+    
     const {isModalVisible, setIsModalVisible} = useModal();// Controla a visibilidade do modal
 
     const { register, handleSubmit, errors, control } = useForm({
@@ -191,6 +184,15 @@ const CadastrarJovem_3 = () => {
     function handleModal(data) {
         setFormData(data);
         setIsModalVisible(true);
+    }
+
+    const defineValidadeAso = (dataAso) =>{
+        const asoTime = new Date(dataAso).getTime()
+        const a = asoTime+31449600000
+        console.log(a)
+        const validadeTime = dataFormat.iso(asoTime+31536000000)
+        console.log(validadeTime)
+        setValidadeAso(validadeTime)
     }
 
     return (
@@ -242,6 +244,25 @@ const CadastrarJovem_3 = () => {
                     </InputText>
                 </InputContainer>
 
+                {
+                    jovem.contrato ==='indireto'?
+                    <InputContainer>
+                        <InputText w={45}>
+                            <label>PIS</label>
+                            <Controller as={InputMask} control={control} mask="999.99999.99-9" name='pis' ref={register} />
+                            <span className="erro"> {errors.pis?.message} </span>
+                        </InputText>
+
+                        <InputText w={45}>
+                            <label>Exame admissional</label>
+                            <input name='aso' type="date" ref={register} onBlur={(e) => defineValidadeAso(e.target.value)} />
+                            <span className="erro"> {errors.aso?.message} </span>
+                        </InputText>
+                    </InputContainer>
+                    : false
+                }
+                
+
                 <InputContainer>
                     <InputText w={45}>
                         <label>Municipio de nascimento</label>
@@ -267,34 +288,65 @@ const CadastrarJovem_3 = () => {
 
                 
                 <InputContainer>
-                    <InputText w={100}>
-                        <label>Telefones</label>
-                        <Controller as={InputMask} control={control} name='fone1' ref={register} />
+                    <InputText w={45}>
+                        <label>Telefone do jovem</label>
+                        <Controller as={InputMask} control={control} mask="(99) 99999-9999" name='fone1' ref={register} />
                         <span className="erro"> {errors.fone1?.message} </span>
-                </InputText>
-                </InputContainer>
-
-                <InputContainer>
-                    <InputText w={100}>
-                        <label>Bilhete Unico</label>
-                        <input name='bilhete_unico' ref={register} />
-                        <span className="erro"> {errors.bilhete_unico?.message} </span>
+                    </InputText>
+                    <InputText w={45}>
+                        <label>Telefones de referência</label>
+                        <input name='fone2' ref={register} />
+                        <span className="erro"> {errors.fone2?.message} </span>
                     </InputText>
                 </InputContainer>
 
                 <InputContainer>
                     <InputText w={45}>
-                        <label>CTPS</label>
-                        <input name='ctps' ref={register} />
-                        <span className="erro"> {errors.ctps?.message} </span>
+                        <label>Email</label>
+                        <input type='email' name='email_jovem' ref={register} />
+                        <span className="erro"> {errors.email?.message} </span>
                     </InputText>
 
                     <InputText w={45}>
-                        <label>Série</label>
-                        <input name='serie' ref={register} />
-                        <span className="erro"> {errors.serie?.message} </span>
+                        <label>Email do reponsável</label>
+                        <input type='email' name='email_responsavel' ref={register} />
+                        <span className="erro"> {errors.email_responsavel?.message} </span>
                     </InputText>
                 </InputContainer>
+
+                <InputContainer>
+                    <InputText w={45}>
+                        <label>PCD</label>
+                        <select name='pcd' ref={register}>
+                            <option valeu='nao'> NÃO </option>
+                            <option valeu='sim'> SIM </option>
+                        </select>
+                        <span className="erro"> {errors.pcd?.message} </span>
+                    </InputText>
+
+                    <InputText w={45}>
+                        <label>Tipo da deficiência</label>
+                        <input name='deficiencia' list={'deficiencia'} ref={register}/>
+                        <datalist id={'deficiencia'}>
+                            <option value='INTELECTUAL'/> 
+                            <option value='FISICA'/> 
+                            <option value='AUDITIVA'/> 
+                            <option value='VISUAL'/> 
+                            <option value='MENTAL'/> 
+                        </datalist>
+                        <span className="erro"> {errors.deficiencia?.message} </span>
+                    </InputText>
+                </InputContainer>
+
+                { jovem.contrato==='indireto'?
+                    <InputContainer>
+                        <InputText w={100}>
+                            <label>Bilhete Unico</label>
+                            <Controller as={InputMask} control={control} mask="21.04.99999999-9" name='bilhete_unico' ref={register} />
+                            <span className="erro"> {errors.bilhete_unico?.message} </span>
+                        </InputText>
+                    </InputContainer> : false
+                }
 
                 <h2>Responsáveis</h2>
                 <hr />
@@ -513,12 +565,14 @@ const CadastrarJovem_3 = () => {
                 <hr />
 
                 <InputContainer>
+                {jovem.contrato==='indireto'?
                     <InputText w={30}>
                         <label>Chapa</label>
                         <input name='matri_ap' maxlength="6" ref={register} />
                         <span className="erro"> {errors.matri_ap?.message} </span>
                     </InputText>
-
+                : false
+                }
                     <InputText w={30}>
                         <label>J.A</label>
                         <Controller as={InputMask} control={control} mask="99/999" name='ja' ref={register} />
@@ -532,21 +586,24 @@ const CadastrarJovem_3 = () => {
                     </InputText>
                 </InputContainer>
 
-                <InputContainer>
-                    <InputText w={45}>
-                        <label>Oficio</label>
-                        <Controller as={InputMask} control={control} name='oficio' ref={register} />
-                        <span className="erro"> {errors.oficio?.message} </span>
-                    </InputText>
+                {jovem.contrato==='indireto'?
+                    <InputContainer>
+                        <InputText w={45}>
+                            <label>Oficio</label>
+                            <Controller as={InputMask} control={control} name='oficio' ref={register} />
+                            <span className="erro"> {errors.oficio?.message} </span>
+                        </InputText>
 
-                    <InputText w={45}>
-                        <label>Data do oficio</label>
-                        <input type="date" name='data_oficio' ref={register} />
-                        <span className="erro"> {errors.data_oficio?.message} </span>
-                    </InputText>    
-                </InputContainer>
-                
-                <input style={{ 'display': 'none' }} name="inclusao_pessoais" value={1} ref={register} />
+                        <InputText w={45}>
+                            <label>Data do oficio</label>
+                            <input type="date" name='data_oficio' ref={register} />
+                            <span className="erro"> {errors.data_oficio?.message} </span>
+                        </InputText>    
+                    </InputContainer>
+                :false
+                }
+                <input style={{ 'display': 'none' }} name="inclusao_pessoais" value={1} ref={register}  />
+                <input style={{ 'display': 'none' }} name ="validade_aso" value={validadeAso} ref={register}/>
 
                 <input type="submit" value="Enviar" />
             </Form>

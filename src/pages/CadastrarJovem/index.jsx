@@ -52,7 +52,7 @@ const validationSchema = yup.object().shape({
     jornada: yup
         .string()
         .required(),
-    inicial: yup
+    periodo_inicial: yup
         .string()
         .required(),
 })
@@ -182,8 +182,8 @@ const CadastrarJovem = () => {
                     <InputContainer>
                         <InputText w={100}>
                             <label>Formação Inicial</label>
-                            <input name='inicial' ref={register({ required: true })} />
-                            <span className="erro"> {errors.inicial?.message} </span>
+                            <input name='periodo_inicial' ref={register({ required: true })} />
+                            <span className="erro"> {errors.periodo_inicial?.message} </span>
                         </InputText>
                     </InputContainer>
 

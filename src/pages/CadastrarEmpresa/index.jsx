@@ -7,12 +7,7 @@ import { validateCNPJ } from "validations-br";
 import { useState } from 'react';
 import ReactCepPromise from "react-cep-promise";
 
-
-
-
 import EmpresaService from '../../services/empresas';
-
-
 
 import style from '../../globalStyle.css';
 
@@ -72,10 +67,10 @@ const validationSchema = yup.object().shape({
     vr: yup
         .string()
         .required(),
-    vr_valor: yup
+    va: yup
         .string()
         .required(),
-    almoco: yup
+    vr_valor: yup
         .string()
         .required(),
     vt: yup
@@ -291,8 +286,8 @@ const FormEmpresa = () => {
                         <label>Contrato</label>
                         <select name='contrato' ref={register}>
                             <option value="" >Selecione...</option>
-                            <option value="DIRETO" >DIRETO</option>
-                            <option value="INDIRETO">INDIRETO</option>
+                            <option value="direto" >DIRETO</option>
+                            <option value="indireto">INDIRETO</option>
                         </select>
                         <span className="erro"> {errors.contrato?.message} </span>
                     </InputText>
@@ -303,16 +298,17 @@ const FormEmpresa = () => {
                         <label>Modalidade</label>
                         <select name='modalidade_id' ref={register}>
                             <option value="" >Selecione...</option>
-                            <option value="1">ARCO ADM 6HR VIGENTE</option>
-                            <option value="2">ARCO ADM 6HR HORA</option>
-                            <option value="3">ARCO ADM 4HR</option>
-                            <option value="4">ADM 6HR VIGENTE</option>
-                            <option value="5">ADM 6HR HORA</option>
-                            <option value="6">ADM 4HR</option>
-                            <option value="7">ARCO EDUCAÇÃO</option>
-                            <option value="8">COMERCIO 6HR</option>
-                            <option value="9">COMERCIO 4HR</option>
-                            <option value="10">COMERCIO 4:45HR</option>
+                            <option value="1">ARCO OCUP - 6HR - [ VIGENTE ]</option>
+                            <option value="2">ARCO OCUP - 6HR [ HORA ]</option>
+                            <option value="3">ARCO OCUP - [ 4HR ]</option>
+                            <option value="4">ADM - 6HR - [VIGENTE]</option>
+                            <option value="5">ADM - 6HR - [ HORA ]</option>
+                            <option value="6">ADM - [4HR]</option>
+                            <option value="14">ARCO EDUCAÇÃO - 6HR - [VIGENTE]</option>
+                            <option value="7">ARCO EDUCAÇÃO - 6HR - [HORA]</option>
+                            <option value="8">COMERCIO - [6HR]</option>
+                            <option value="9">COMERCIO - [4HR]</option>
+                            <option value="10">COMERCIO - [4:45HR]</option>
                         </select>
                         <span className="erro"> {errors.modalidade_id?.message} </span>
                     </InputText>
@@ -321,45 +317,48 @@ const FormEmpresa = () => {
                 <InputContainer>
 
                     <InputText w={40}>
-                        <label>Alimentação</label>
+                        <label>Vale Refeição</label>
                         <select name='vr' ref={register}>
                             <option value="" disable selected >Selecione..</option>
-                            <option value="SIM">Sim</option>
-                            <option value="NAO">Não</option>
+                            <option value="SIM">SIM</option>
+                            <option value="NÃO">NÃO</option>
                         </select>
                         <span className="erro"> {errors.vr?.message} </span>
                     </InputText>
                     <InputText w={40}>
-                        <label>Valor</label>
-                        <Controller as={InputMask} control={control} name='vr_valor' ref={register} />
-                        <span className="erro"> {errors.vr_valor?.message} </span>
+                        <label>Vale Alimentação</label>
+                        <select name='va' ref={register}>
+                            <option value="" disable selected >Selecione..</option>
+                            <option value="SIM">SIM</option>
+                            <option value="NÃO">NÃO</option>
+                        </select>
+                        <span className="erro"> {errors.va?.message} </span>
                     </InputText>
                 </InputContainer>
 
                 <InputContainer>
+                    <InputText w={40}>
+                        <label>Valor do benefício</label>
+                        <input list={'vr_valor'} name='vr_valor' ref={register} />
+                        <datalist id="vr_valor">
+                            <option value={'R$ 181,00'}>R$ 181,00</option>
+                            <option value={'PELA EMPRESA'}>PELA EMPRESA</option>
+                            <option valeu={'REFEIÇÃO LOCAL'}>REFEIÇÃO LOCAL</option>
+                        </datalist>
+                        <span className="erro"> {errors.vr_valor?.message} </span>
+                    </InputText>
 
                     <InputText w={40}>
                         <label>Vale Transporte</label>
                         <select id="vt" name="vt" ref={register}>
                             <option value="" disable selected >Selecione..</option>
-                            <option value="SIM">Sim</option>
-                            <option value="NAO">Não</option>
+                            <option value="SIM">SIM</option>
+                            <option value="NÃO">NÃO</option>
+                            <option value="PELA EMPRESA">PELA EMPRESA</option>
+                            <option value="DIAS DE CURSO">DIAS DE CURSO</option>
                         </select>
                         <span className="erro"> {errors.vt?.message} </span>
                     </InputText>
-
-                    <InputText w={40}>
-                        <label>Almoço</label>
-                        <select name="almoco" ref={register}>
-                            <option value="" disable selected >Selecione..</option>
-                            <option value="NÃO">NÃO</option>
-                            <option value="00:15">00:15</option>
-                            <option value="01:00">01:00</option>
-                            <option value="01:30">01:30</option>
-                        </select>
-                        <span className="erro"> {errors.almoco?.message} </span>
-                    </InputText>
-
                 </InputContainer>
 
                 <input type="submit" value="Enviar" />

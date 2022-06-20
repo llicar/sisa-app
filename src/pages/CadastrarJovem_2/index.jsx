@@ -46,9 +46,14 @@ const validationSchema = yup.object().shape({
         .string()
         .required(),
 
-    inicial: yup
+    periodo_inicial: yup
         .string()
         .required(),
+
+    periodo_final: yup
+    .string()
+    .required(),
+
     calendario : yup
         .mixed()
         .required()
@@ -118,7 +123,8 @@ const CadastrarJovem_2 = () => {
         Data.append('termino_emp', data.termino_emp)
         Data.append('inicio_ferias', data.inicio_ferias)
         Data.append('fim_ferias', data.fim_ferias)
-        Data.append('inicial', data.inicial)
+        Data.append('periodo_inicial', data.periodo_inicial)
+        Data.append('periodo_final', data.periodo_final)
         Data.append('inclusao_calendario',1)
         Data.append('obs',data.obs)
         Data.append('calendarName', hashCalendarName)
@@ -187,10 +193,15 @@ const CadastrarJovem_2 = () => {
                 </InputContainer>
 
                 <InputContainer>
-                    <InputText w={100}>
+                    <InputText w={45}>
                         <label>Formação inicial</label>
-                        <input name='inicial' defaultValue={jovem.inicial} ref={register} />
-                        <span className="erro"> {errors.inicial?.message} </span>
+                        <input name='periodo_inicial' defaultValue={jovem.periodo_inicial} ref={register} />
+                        <span className="erro"> {errors.periodo_inicial?.message} </span>
+                    </InputText>
+                    <InputText w={45}>
+                        <label>Formação final</label>
+                        <input name='periodo_final'ref={register} />
+                        <span className="erro"> {errors.periodo_final?.message} </span>
                     </InputText>
                 </InputContainer>
 
