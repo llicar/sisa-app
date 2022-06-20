@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react'
 import { InputText } from '../../components/input'
-import exportarInventario from '../../utils/exportarInventario.js'
-
-import excelIcon from '../../assets/icons/excel.svg'
 
 const Table = styled.table`
 
@@ -13,25 +10,24 @@ const Table = styled.table`
     line-height:50px;
     margin: 0 auto;
 
-    
-
+ 
     thead tr th {
         color:#1EC3BA;
         position: sticky;
         left: 0;
         top:0;
         background-color:#243240;
+        text-align: left;  
     }
 
     tbody{
         color: rgb(230,230,230);
-        
     }
     
 
     td{
         border-bottom: 1px solid #415A72;
-        background-color:#243240;   
+        background-color:#243240; 
     }   
 
 `
@@ -48,28 +44,7 @@ const Container = styled.div`
         display: flex;
         align-items:center;
 
-        button{
-            margin-left: 50px;
-            height:45px;
-            margin-top:20px;
-            width:170px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size:20px;
-            background-color: #1EC3BA;
-            border: none;
-            border-radius:6px;
-            padding-inline: 10px;
-            font-family: roboto;
-            font-weight:bold;
-            color: #fff;
-
-            :hover{
-                cursor: pointer;
-            }
         }
-    }
    
 `
 
@@ -81,9 +56,7 @@ const TableContainer = styled.div`
     background-color:#243240;
     padding:20px;
     border-radius:10px;
-  
     
-
     input{
         height:40px;
         z-index:11;
@@ -100,24 +73,29 @@ const TableContainer = styled.div`
 
 `
 
-
-const DataTable = ({ data }) => {
-
-
+const DataTable = ({ data,itens }) => {
 
     const [q, setQ] = useState("");
 
-    function search(rows) {
+    function search(rows,itens) {
         return rows.filter((row) =>
-            row.Nome.toLowerCase().indexOf(q.toLowerCase()) > -1 ||
-            row.Empresa.toLowerCase().indexOf(q.toLowerCase()) > -1
-        )
+            itens.length===1?
+            row[itens[0]].toLowerCase().indexOf(q.toLowerCase()) > -1:
+
+            itens.length===2?
+            row[itens[0]].toLowerCase().indexOf(q.toLowerCase()) > -1|| 
+            row[itens[1]].toLowerCase().indexOf(q.toLowerCase()) > -1:
+
+            itens.length===3?
+            row[itens[0]].toLowerCase().indexOf(q.toLowerCase()) > -1|| 
+            row[itens[1]].toLowerCase().indexOf(q.toLowerCase()) > -1||
+            row[itens[2]].toLowerCase().indexOf(q.toLowerCase()) > -1:false
+      )
     }
 
-    const filterData = search(data);
+    const filterData = search(data,itens);
    
     const columns = filterData[0] && Object.keys(filterData[0])
-
 
     return (
 
@@ -136,7 +114,6 @@ const DataTable = ({ data }) => {
                     } />
 
             </InputText>
-            <button onClick={exportarInventario}>Exportar<img src={excelIcon} alt="baixar inventario"/></button>
             </div>
 
             <TableContainer>
