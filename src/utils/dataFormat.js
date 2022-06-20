@@ -3,6 +3,20 @@ import ptBR from 'date-fns/locale/pt-BR';
 
 class dataFormat {
 
+   isValidDate(props) {
+        const parsedDate = new Date(props)
+        return parsedDate instanceof Date && !isNaN(parsedDate)
+      }
+
+    brToIso(props){
+        if (!props) return 0
+        
+        const splitedDate = props.split('/')
+        const isoDate = splitedDate[2]+"-"+splitedDate[1]+"-"+splitedDate[0]
+
+        return isoDate
+    }
+
     fullDateBR(props) {
 
         if (!props) {
@@ -20,9 +34,16 @@ class dataFormat {
             return 0
         }
         else {
-            const utcStringFormated = props.replace("Z", "")
-            let date = new Date(utcStringFormated);
 
+            let date
+            if(typeof props == "string"){
+                const utcStringFormated = props.replace("Z", "")
+                date = new Date(utcStringFormated);
+            } else if(typeof props == "number"){
+                date = new Date(props);
+            } else(
+                date = props
+            )
             if (!isValid(date)) {
                 return 0
             } else {
