@@ -113,7 +113,8 @@ const DetalheJovem = () => {
                 isoFimFerias: dataFormat.iso(response.data[0].fim_ferias),
                 isoEmissaoRg: dataFormat.iso(response.data[0].emissao_rg),
                 isoDataOficio: dataFormat.iso(response.data[0].data_oficio),
-                isoDataNascimento: dataFormat.iso(response.data[0].data_nascimento)
+                isoDataNascimento: dataFormat.iso(response.data[0].data_nascimento),
+                isoAso: dataFormat.iso(response.data[0].aso)
             }
             setDatasFormatadas(datas)
         }
@@ -216,7 +217,7 @@ const DetalheJovem = () => {
                                 className="linkCalendario"
                                 target="_blank" 
                                 rel="noreferrer" 
-                                href={`${process.env.REACT_APP_CALENDARIO_URL}${jovem.calendario}`}>
+                                href={`${process.env.REACT_APP_S3_URL}${'calendarios/'+jovem.calendario}`}>
                                     Calendário
                                 </a>
                                 <DocButton className="linkDoc" onClick={() =>{ generateDocument(jovem, 'oficio', datasFormatadas)}}>Oficio</DocButton>
@@ -418,6 +419,20 @@ const DetalheJovem = () => {
                             </InputText>
                         </InputContainer>
 
+                        <InputContainer>
+                            <InputText w={45}>
+                                <label>PIS</label>
+                                <input name='pis' defaultValue={jovem.pis} ref={register} />
+                                <span className="erro"> {errors.pis?.message} </span>
+                            </InputText>
+
+                            <InputText w={45}>
+                                <label>Exame admissional</label>
+                                <input name='aso' type="date" defaultValue={datasFormatadas.isoAso} ref={register} />
+                                <span className="erro"> {errors.aso?.message} </span>
+                            </InputText>
+                        </InputContainer>
+
                         {/*--------*/<h2>Datas</h2>/*--------*/}
                         <hr />
 
@@ -464,10 +479,16 @@ const DetalheJovem = () => {
                         </InputContainer>
 
                         <InputContainer>
-                            <InputText w={100}>
+                            <InputText w={45}>
                                 <label>Formação Inicial</label>
-                                <input name='inicial' defaultValue={jovem.inicial} ref={register({ required: true })} />
-                                <span className="erro"> {errors.inicial?.message} </span>
+                                <input name='periodo_inicial' defaultValue={jovem.periodo_inicial} ref={register} />
+                                <span className="erro"> {errors.periodo_inicial?.message} </span>
+                            </InputText>
+
+                            <InputText w={45}>
+                                <label>Formação Inicial</label>
+                                <input name='periodo_final' defaultValue={jovem.periodo_final} ref={register} />
+                                <span className="erro"> {errors.periodo_final?.message} </span>
                             </InputText>
                         </InputContainer>
 
@@ -535,29 +556,29 @@ const DetalheJovem = () => {
 
                         <InputContainer>
                             <InputText w={45}>
-                                <label>CTPS</label>
-                                <input name='ctps' defaultValue={jovem.ctps} ref={register} />
-                                <span className="erro"> {errors.ctps?.message} </span>
-                            </InputText>
-
-                            <InputText w={45}>
-                                <label>Série</label>
-                                <input name='serie' defaultValue={jovem.serie} ref={register} />
-                                <span className="erro"> {errors.serie?.message} </span>
-                            </InputText>
-                        </InputContainer>
-
-                        <InputContainer>
-                            <InputText w={45}>
-                                <label>Telefone 1</label>
+                                <label>Telefone do jovem</label>
                                 <input name='fone1' defaultValue={jovem.fone1} ref={register} />
                                 <span className="erro"> {errors.fone1?.message} </span>
                             </InputText>
 
                             <InputText w={45}>
-                                <label>Telefone 2</label>
+                                <label>Telefones de referência</label>
                                 <input name='fone2' defaultValue={jovem.fone2} ref={register} />
                                 <span className="erro"> {errors.fone2?.message} </span>
+                            </InputText>
+                        </InputContainer>
+
+                        <InputContainer>
+                            <InputText w={45}>
+                                <label>Email</label>
+                                <input name='email_jovem' defaultValue={jovem.email_jovem} ref={register} />
+                                <span className="erro"> {errors.email_jovem?.message} </span>
+                            </InputText>
+
+                            <InputText w={45}>
+                                <label>Email do responsável</label>
+                                <input name='email_responsavel' defaultValue={jovem.email_responsavel} ref={register} />
+                                <span className="erro"> {errors.email_responsavel?.message} </span>
                             </InputText>
                         </InputContainer>
 
