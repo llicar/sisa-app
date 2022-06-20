@@ -2,7 +2,6 @@ import {MenuStyle} from './style.js'
 import { useHeader } from '../../contexts/headerContext';
 import {Link,useRouteMatch} from 'react-router-dom';
 
-import {IoMenuOutline} from 'react-icons/io5'
 import {IoPersonAddSharp} from 'react-icons/io5'
 import {IoSearchSharp} from 'react-icons/io5'
 import {IoDocumentText} from 'react-icons/io5'
@@ -43,16 +42,16 @@ const Menu = () =>{
                         <h4>CONSULTAR</h4>
                     </div>
                     <Link style={{textDecoration:'none', color:path==='/ListarJovens'?'#1EC3BA':'white'}} to='/ListarJovens'><li>Aprendizes</li></Link>
-                    <Link style={{textDecoration:'none', color:path==='/CadastrarEmpresa'?'#1EC3BA':'white'}} to='/CadastrarEmpresa'><li>Empresas</li></Link>
+                    <Link style={{textDecoration:'none', color:path==='/ListarEmpresas'?'#1EC3BA':'white'}} to='/ListarEmpresas'><li>Empresas</li></Link>
                 </ul>
                 <ul>
                     <div className="tag">
                         <IoDocumentText/> 
-                        <h4>FALTAS</h4>
+                        <h4>AUSÊNCIAS</h4>
                     </div>
-                    <li>Nova falta</li>
-                    <li>Lançar faltas AP</li>
-                    <li>Consultar faltas</li>
+                    <Link style={{textDecoration:'none', color:path==='/CadastrarFalta'?'#1EC3BA':'white'}} to='/CadastrarFalta'><li>Registrar ausência</li></Link>
+                    <li>Registrar ausência de curso</li>
+                    <Link style={{textDecoration:'none', color:path==='/ConsultarFaltas'?'#1EC3BA':'white'}} to='/ConsultarFaltas'><li>Consultar Ausências</li></Link>
                 </ul>
             </div>
         </MenuStyle>
