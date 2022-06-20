@@ -47,7 +47,7 @@ const ModalForm = (
             try{
                 await service(data,paramId).catch(err => {
                     console.log(err)
-                    throw new Error('Ops, algo deu errado!')
+                    throw new Error(err)
                     
                 })
                 setLoading(2)
@@ -79,7 +79,7 @@ const ModalForm = (
 
     // Definindo o background do Container de acordo com o estado do (loading)
     Modal.defaultProps = {
-        status: "rgba(36, 50, 64, 0.8)"
+        status: "rgba(36, 50, 64, 0.9)"
     }
 
     if (loading === 2) {
