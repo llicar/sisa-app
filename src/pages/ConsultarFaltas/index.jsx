@@ -309,7 +309,7 @@ const ConsultarFatas = () => {
                         
                             <div className="groupTextInfo">
                                 <label>Descrição</label>
-                                <p>Jovem foi ao médico e realizou o teste de covid</p>
+                                <p>{faltaSelecionada.detalhes}</p>
                             </div>
 
                             <div class="containerAtestado">   
