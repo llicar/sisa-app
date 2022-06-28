@@ -69,11 +69,6 @@ const validationSchema = yup.object().shape({
         .string()
         .required(),
 
-        
-    cep: yup
-        .string()
-        .required(),
-
     bairro: yup
         .string()
         .required(),
