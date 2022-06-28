@@ -68,27 +68,7 @@ const validationSchema = yup.object().shape({
     email_jovem: yup
         .string()
         .required(),
-
-    bairro: yup
-        .string()
-        .required(),
-
-    rua: yup
-        .string()
-        .required(),
-
-    municipio: yup
-        .string()
-        .required(),
-
-    numero: yup
-        .string()
-        .required(),
-
-    uf: yup
-        .string()
-        .required(),
-
+    
     escola: yup
         .string()
         .required(),
