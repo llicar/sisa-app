@@ -32,6 +32,9 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 import excluirIcon from '../../assets/icons/excluir.png'
 
+import Lottie from "lottie-react";
+import animationLogo from '../../assets/animationLogo.json'
+
 const ConsultarFatas = () => {
 
     const [data, setData] = useState([]);
@@ -211,6 +214,7 @@ const ConsultarFatas = () => {
     }
     useEffect(() => {
 
+        setShowLoader(true);
         FaltasService.index()
             .then(response => {
                 const newData = response.data.map((response,i) => {
@@ -263,8 +267,8 @@ const ConsultarFatas = () => {
             <Header />
             {
                 showLoader ?
-                    <div className="loader">
-                        <SquareLoader color={'#1EC3BA'} />
+                    <div className="loader" style={{width:'150px'}}>
+                        <Lottie animationData={animationLogo} loop={true} />
                     </div>
 
                     :

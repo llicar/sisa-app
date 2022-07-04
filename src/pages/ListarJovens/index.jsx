@@ -11,9 +11,10 @@ import Header from '../../components/header'
 import JovemService from '../../services/jovens'
 import dataFormat from "../../utils/dataFormat"
 import SquareLoader from "react-spinners/SquareLoader";
-
-
+import Lottie from "lottie-react";
+import animationLogo from '../../assets/animationLogo.json'
 import style from './style.css'
+
 
 import {DateRangeColumnFilter} from '../../components/Tables/filters/RangeFilter'
 import Filter from '../../components/Tables/filters/filter'
@@ -45,6 +46,15 @@ const ListarJovens = () => {
           disableFilters: true
         },
       ];
+
+      const lottieConfig = {
+        loop: true,
+        autoplay: true, 
+        path: animationLogo,
+        rendererSettings: {
+          preserveAspectRatio: 'xMidYMid slice'
+        }
+      };
 
     const [data,setData] = useState([]);
     const [showLoader,setShowLoader] = useState(true);
@@ -79,7 +89,7 @@ const ListarJovens = () => {
                 {
                     showLoader?
                         <div className="loader">
-                        <SquareLoader color={'#1EC3BA'}/> 
+                         <Lottie animationData={animationLogo} loop={true} />
                         </div>
                         
                         :

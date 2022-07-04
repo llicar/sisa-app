@@ -19,7 +19,7 @@ import { LinkMenu as DocButton } from "../home/style";
 import { InputText } from "../../components/input";
 import FormNote from '../../components/formNote'
 import FormDesligamento from '../../components/FormDesligamento'
-
+import PermissionGate from '../../components/permissionGate/permissionGate.js'
 
 import EmpresaService from '../../services/empresas'
 import JovemService from '../../services/jovens'
@@ -205,14 +205,33 @@ const DetalheJovem = () => {
                                 <h3>Admissão</h3>
                                 <h4>{datasFormatadas.admissao}</h4>
                             </div>
-                            <button className="btnDesligar" disable value="disable"  onClick={() => {setIsModalDeslVisible(true)}/*handleModalDesligamento*/}>Desligar Jovem</button>
+                            <PermissionGate permissions={['EditarJovens']}>
+                                <button className="btnDesligar" disable value="disable"  onClick={() => {setIsModalDeslVisible(true)}/*handleModalDesligamento*/}>Desligar Jovem</button>
+                            </PermissionGate>
                         </div>
 
                         <div className="cardDocs card">
                             <div className="docs">
                                 <h3>Documentos</h3>
-                                <DocButton className="linkDoc" onClick={() => { generateDocument(jovem, 'comunicado', datasFormatadas) }} >Comunicado de admissão</DocButton>
-                                <DocButton className="linkDoc" onClick={() =>{ generateDocument(jovem, 'carta', datasFormatadas)}}>Carta de encaminhamento</DocButton>
+                                <PermissionGate permissions={['VerDocsAdmiJovens']}>
+                                    <DocButton className="linkDoc" onClick={() => { generateDocument(jovem, 'comunicado', datasFormatadas) }} >Comunicado de admissão</DocButton>
+                                    <DocButton className="linkDoc" onClick={() =>{ generateDocument(jovem, 'carta', datasFormatadas)}}>Carta de encaminhamento</DocButton>
+                                    <DocButton className="linkDoc" onClick={() =>{ generateDocument(jovem, 'oficio', datasFormatadas)}}>Oficio</DocButton>
+                                    <div className="containerContratos">
+                                        {
+                                            jovem.contrato === 'direto' ?
+                                            <DocButton className="linkDoc" onClick={() =>{ generateDocument(jovem, 'contrato-direto', datasFormatadas)}}>Contrato</DocButton>
+                                            :
+                                            <DocButton 
+                                                className="linkDoc" 
+                                                onClick={event=>event.preventDefault() } 
+                                                style={{ pointerEvents: 'none', backgroundColor: '#465f77'}}
+                                                >
+                                                Contrato
+                                            </DocButton>
+                                        }
+                                    </div>
+                                </PermissionGate>
                                 <a 
                                 className="linkCalendario"
                                 target="_blank" 
@@ -220,22 +239,8 @@ const DetalheJovem = () => {
                                 href={`${process.env.REACT_APP_S3_URL}${'calendarios/'+jovem.calendario}`}>
                                     Calendário
                                 </a>
-                                <DocButton className="linkDoc" onClick={() =>{ generateDocument(jovem, 'oficio', datasFormatadas)}}>Oficio</DocButton>
-                                <div className="containerContratos">
-                                    {
-                                        jovem.contrato === 'direto' ?
-                                        <DocButton className="linkDoc" onClick={() =>{ generateDocument(jovem, 'contrato-direto', datasFormatadas)}}>Contrato</DocButton>
-                                        :
-                                        <DocButton 
-                                            className="linkDoc" 
-                                            onClick={event=>event.preventDefault() } 
-                                            style={{ pointerEvents: 'none', backgroundColor: '#465f77'}}
-                                            >
-                                            Contrato
-                                        </DocButton>
-                                    }
-                                </div>
                                 
+                                <PermissionGate permissions={['EditarJovens']}>
                                 <form className="form-calendario"  enctype="multipart/form-data" onSubmit={handleSubmit(handleCalendario)}>
                                     <InputContainer style={{width:'100%'}}>
                                         <InputText w={70}>
@@ -262,9 +267,10 @@ const DetalheJovem = () => {
                                             }
                                         </InputText>
                                     </InputContainer>
-                             </form>        
+                                </form>  
+                                </PermissionGate>      
                             </div>
-
+                            <PermissionGate permissions={['EditarJovens']}>                
                             <div className="status">
                                 <h3>Impressão</h3>
                                 {
@@ -285,7 +291,7 @@ const DetalheJovem = () => {
                                         </div>
                                 }
                             </div>
-
+                          </PermissionGate>          
                         </div>
 
                         <h3 className="notesTitle">Anotações</h3>
@@ -823,7 +829,9 @@ const DetalheJovem = () => {
                                 <span className="erro"> {errors.data_oficio?.message} </span>
                             </InputText>
                         </InputContainer>
-                        <input type="submit" value="Enviar" disabled={!isDirty} />
+                        <PermissionGate permissions={['EditarJovens']}>
+                            <input type="submit" value="Enviar" disabled={!isDirty} />
+                        </PermissionGate>
                     </Form> 
                 </div>
             </div>

@@ -7,12 +7,16 @@ import { CgArrowRightR } from "react-icons/cg";
 import DefaultTable from "../../components/Tables/DefaultTable"
 import Filter from '../../components/Tables/filters/filter'
 import SelectColumnFilter from '../../components/Tables/filters/SelectColumnFilter'
+import PermissionGate from '../../components/permissionGate/permissionGate.js'
 
 import SubmitButton from '../../components/SubmitButton'
 import Header from '../../components/header'
 import EmpresaService from '../../services/empresas'
 import SquareLoader from "react-spinners/SquareLoader";
 import style from './style.css'
+
+import Lottie from "lottie-react";
+import animationLogo from '../../assets/animationLogo.json'
 
 const ListarJovens = () => {
 
@@ -83,17 +87,20 @@ const ListarJovens = () => {
         <body>
             <Header/>
             <div className="container_itens">
-            <Link style={{fontSyle:'none'}} to={'/CadastrarEmpresa'}>
-                <SubmitButton style={{border: '1px solid #1EC3BA'}} w={120} h={35} color={'rgba(0,0,0,0)'}>
-                    <button>Cadastrar empresa</button>
-                </SubmitButton>
-            </Link>
+            <PermissionGate permissions={['EditarEmpresas']}>
+                <Link style={{fontSyle:'none'}} to={'/CadastrarEmpresa'}>
+                    <SubmitButton style={{border: '1px solid #1EC3BA'}} w={120} h={35} color={'rgba(0,0,0,0)'}>
+                        <button>Cadastrar empresa</button>
+                    </SubmitButton>
+                </Link>
+            </PermissionGate>
+            
             </div>
             
                 {
                     showLoader?
                         <div className="loader">
-                        <SquareLoader  color={'#1EC3BA'}/> 
+                        <Lottie animationData={animationLogo} loop={true} />
                         </div>
                         
                         :

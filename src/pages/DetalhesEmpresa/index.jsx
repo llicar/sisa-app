@@ -16,6 +16,7 @@ import { InputContainer } from '../../components/inputContainer';
 import ModalForm from '../../components/modal';
 import { useModal } from '../../contexts/modalContext';
 import getDirtyValues from '../../utils/getDirtyValues'
+import PermissionGate from '../../components/permissionGate/permissionGate.js'
 
 
 const DetalheEmpresa = () => {
@@ -258,7 +259,9 @@ const DetalheEmpresa = () => {
                     </InputText>
                 </InputContainer>
 
-                <input type="submit" value="Enviar" />
+                <PermissionGate permissions={['EditarEmpresas']}>
+                    <input type="submit" value="Enviar" />
+                </PermissionGate>
             </Form>
 
             { isModalVisible ?

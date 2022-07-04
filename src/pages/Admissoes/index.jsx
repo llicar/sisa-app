@@ -18,6 +18,9 @@ import dataFormat from '../../utils/dataFormat'
 import nada_aqui from '../../assets/images/nada_aqui.svg'
 import { useModal } from '../../contexts/modalContext';
 
+import Lottie from "lottie-react";
+import animationLogo from '../../assets/animationLogo.json'
+
 
 
 
@@ -66,8 +69,8 @@ const Admissoes = () => {
                 </HeaderContainer>
                 {
                     loading?
-                    <div style={{display: 'flex', margin: '0 auto',justifyContent: 'center',marginTop: '130px'}}>
-                        <SquareLoader loading={loading} size={70} color={'#1EC3BA'} />
+                    <div style={{display: 'flex', width:'150px', margin: '0 auto',justifyContent: 'center',marginTop: '130px'}}>
+                        <Lottie animationData={animationLogo} loop={true} />
                     </div>:
                     total?
                     <TableContainer>
