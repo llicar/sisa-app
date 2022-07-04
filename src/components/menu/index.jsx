@@ -6,8 +6,9 @@ import {IoPersonAddSharp} from 'react-icons/io5'
 import {IoSearchSharp} from 'react-icons/io5'
 import {IoDocumentText} from 'react-icons/io5'
 import {IoArrowBackCircleOutline} from 'react-icons/io5'
+import PermissionGate from '../../components/permissionGate/permissionGate.js'
 
-import logoAedha from '../../assets/images/logo_aedha.svg'
+import logoAedha from '../../assets/images/logo_sisa.svg'
 
 const Menu = () =>{
 
@@ -28,6 +29,7 @@ const Menu = () =>{
                 <img alt="logo aedha" src={logoAedha}/>
             </header>
             <div className="container">
+            <PermissionGate permissions={['EditarJovens']}>
                 <ul>
                     <div className="tag">
                         <IoPersonAddSharp/> 
@@ -36,6 +38,7 @@ const Menu = () =>{
                     <Link style={{textDecoration:'none', color:path==='/CadastrarJovem'?'#1EC3BA':'white'}} to='/CadastrarJovem'><li>Nova Admissão</li></Link>
                     <Link style={{textDecoration:'none', color:path==='/Admissoes'?'#1EC3BA':'white'}} to='/Admissoes'><li>Processos</li></Link>
                 </ul>
+            </PermissionGate>
                 <ul>
                     <div className="tag">
                         <IoSearchSharp/> 
@@ -50,7 +53,7 @@ const Menu = () =>{
                         <h4>AUSÊNCIAS</h4>
                     </div>
                     <Link style={{textDecoration:'none', color:path==='/CadastrarFalta'?'#1EC3BA':'white'}} to='/CadastrarFalta'><li>Registrar ausência</li></Link>
-                    <li>Registrar ausência de curso</li>
+                    {/*<li>Registrar ausência de curso</li>*/}
                     <Link style={{textDecoration:'none', color:path==='/ConsultarFaltas'?'#1EC3BA':'white'}} to='/ConsultarFaltas'><li>Consultar Ausências</li></Link>
                 </ul>
             </div>
@@ -60,16 +63,3 @@ const Menu = () =>{
 
 export default Menu;
 
-
-
-
-
-{/*
-      <Menu>
-        <ul>
-          <li><LinkMenu className="btn-menu" to='/CadastrarJovem'>Nova Admissão <RiUserAddFill/> </LinkMenu> </li>
-          <li><LinkMenu className="btn-menu" to='/Admissoes'>Admissões <FaThList/></LinkMenu></li>
-          <li><LinkMenu className="btn-menu" to='/ListarJovens'>Aprendizes <RiUserSearchFill/></LinkMenu></li>
-          <li><LinkMenu className="btn-menu" to='/CadastrarEmpresa'>Empresas <IoBusiness/></LinkMenu></li>
-        </ul>
-</Menu>*/}
