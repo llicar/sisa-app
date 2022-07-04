@@ -5,7 +5,7 @@ import {HeaderStyle} from './style'
 import {Col,Row} from 'react-bootstrap'
 import {IoMenuOutline} from 'react-icons/io5'
 
-import logo from '../../assets/images/logo_aedha.svg'
+import logo from '../../assets/images/logo_sisa.svg'
 
 import {BotaoMenu,BotaoSair} from '../BotaoHeader'
 
@@ -15,6 +15,12 @@ import Menu from '../menu';
 const Header =  () => {
 
     const {isMenuVisible, setIsMenuVisible} = useHeader();
+
+    function limparLocalStorage() {
+        localStorage.removeItem('@sisa-app/token')
+        localStorage.removeItem('@sisa-app/user_id')
+        localStorage.removeItem('@sisa-app/user_permissions')
+    }
 
     return (
         <>
@@ -42,7 +48,7 @@ const Header =  () => {
                 <BotaoMenu to='/Home'>INICIO</BotaoMenu>
                 </Col>
                 <Col>
-                <BotaoSair onClick={()=>{localStorage.removeItem('@sisa-app/token')}} to='/'>SAIR</BotaoSair>
+                <BotaoSair onClick={()=>limparLocalStorage()} to='/'>SAIR</BotaoSair>
                 </Col>
             </Col>
         </HeaderStyle>
