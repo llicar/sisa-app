@@ -7,6 +7,7 @@ import SquareLoader from "react-spinners/SquareLoader";
 import SubmitButton from '../../components/SubmitButton'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import FormatCase from '../../utils/formatCase'
 
 import md5 from 'md5';
 
@@ -315,7 +316,10 @@ const ConsultarFatas = () => {
                                 <label>Descrição</label>
                                 <p>{faltaSelecionada.detalhes}</p>
                             </div>
-
+                            <div className="groupTextInfo">
+                                <label>Lançado por</label>
+                                <p>{FormatCase(faltaSelecionada.nome_usuario)}</p>
+                            </div>
                             <div class="containerAtestado">   
                                 <div className="groupTextInfo">
                                     <label>Atestado médico</label>
@@ -350,10 +354,8 @@ const ConsultarFatas = () => {
                                              </SubmitButton>  
                                         }
                                             
-                                        
-                                            
                                     </InputFileContainer>
-                                </form> 
+                                </form>  
                             </div> 
                         </div>
 
