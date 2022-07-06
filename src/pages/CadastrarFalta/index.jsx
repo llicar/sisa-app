@@ -161,6 +161,7 @@ const CadastrarFalta = () => {
         } 
         
         const tempo_falta = (parseInt(data.horas_falta) * 60) + parseInt(data.minutos_falta)
+        const userId = localStorage.getItem('@sisa-app/user_id')
 
         Data.append('jovem_id',data.jovem_id)
         Data.append('data_falta', data.data_falta)
@@ -170,6 +171,7 @@ const CadastrarFalta = () => {
         Data.append('status_falta', data.status_falta)
         Data.append('detalhes', data.detalhes)
         Data.append('periodo_falta', data.periodo_falta)
+        Data.append('responsavel_falta', userId)
         
         
         setFormData(Data);
