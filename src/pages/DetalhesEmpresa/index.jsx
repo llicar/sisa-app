@@ -121,7 +121,7 @@ const DetalheEmpresa = () => {
                     </InputText>
                     <InputText w={40}>
                         <label>E-mail</label>
-                        <input type='email' name='email' defaultValue={empresa.email} ref={register} />
+                        <input name='email' defaultValue={empresa.email} ref={register} />
                         <span className="erro"> {errors.email?.message} </span>
                     </InputText>
                 </InputContainer>
