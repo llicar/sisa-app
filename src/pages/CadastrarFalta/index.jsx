@@ -84,7 +84,7 @@ const CadastrarFalta = () => {
         horas_falta: yup
             .number()
             .typeError('Valor inválido')
-            .moreThan(0,'Valor inválido')
+            .min(0,'Valor inválido')
             .lessThan(7,'Máximo 6 horas'),
 
         minutos_falta: yup
@@ -93,7 +93,7 @@ const CadastrarFalta = () => {
         .transform((curr, orig) => orig === '' ? null : curr)
         .default(undefined)
         .typeError('Valor inválido')
-        .moreThan(0,'Valor inválido')
+        .min(0,'Valor inválido')
         .lessThan(60,'Máximo 59 minutos'),
             
         data_ultima_falta: 

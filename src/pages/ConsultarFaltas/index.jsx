@@ -155,6 +155,7 @@ const ConsultarFatas = () => {
     async function buscarDados(idFalta) {
         const response = await FaltasService.buscarFaltaPorId(idFalta)
         setFaltaSelecionada(response.data[0])
+        console.log(response.data[0].horas_falta)
         setTempoFalta(Time.MinutesForHours(response.data[0].horas_falta))
     }
 
